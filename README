@@ -1,0 +1,12 @@
+# Packages for Ubuntu 10.04
+
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get install python-pip
+
+# Install redis
+wget http://redis.googlecode.com/files/redis-2.2.12.tar.gz
+tar -xf redis-2.2.12.tar.gz
+cd redis-2.2.12
+sudo make
+./src/redis-server
