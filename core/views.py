@@ -86,7 +86,7 @@ def login(request, provider):
     Login - store the next param as a cookie since session may be lost.
     """
     response = redirect("begin", provider)
-    response.set_cookie("next", request.GET.get("next", ""))
+    response.set_cookie("next", request.GET.get("next", "home"))
     return response
 
 def loggedin(request):
