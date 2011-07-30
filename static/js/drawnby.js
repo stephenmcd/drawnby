@@ -21,7 +21,9 @@ $(function() {
 
     actions.join = function(username, userID) {
         if ($('#user-' + userID).length == 0) {
-            $('#users').append('<li id="user-' + userID + '">' + username + '</li>');
+            $('#users').append('<li id="user-' + userID + '">' +
+                               '<img src="' + window.MEDIA_URL + 'photos/' + userID + '.20x20_q85_crop-smart.jpg">' +
+                               username + '</li>');
         }
     };
 

@@ -1,3 +1,4 @@
+{% load thumbnail core_tags %}
 <html>
 <head>
     {% load compress %}
@@ -24,7 +25,9 @@
     <li><a href="{% url list %}">View all</a></li>
     <li><a href="{% url new %}">New</a></li>
     {% if request.user.is_authenticated %}
-    <li>Logged in as {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
+    {% with request.user|photo_for_user as user_photo %}
+    <li>Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
+    {% endwith %}
     {% endif %}
 </ul>
 

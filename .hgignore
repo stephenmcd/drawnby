@@ -7,3 +7,4 @@ syntax: glob
 .coverage
 local_settings.py
 static/cache/*
+static/photos/*
