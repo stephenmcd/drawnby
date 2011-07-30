@@ -1,5 +1,19 @@
 <html>
-<head></head>
+<head>
+    {% load compress %}
+    {% compress js %}
+    <script>window.MEDIA_URL = '{{ MEDIA_URL }}';</script>
+    <script src="{{ MEDIA_URL }}js/jquery.js"></script>
+    <script src="{{ MEDIA_URL }}js/jquery.tools.js"></script>
+    <script src="{{ MEDIA_URL }}js/json.js"></script>
+    <script src="{{ MEDIA_URL }}js/socket.io.js"></script>
+    <script src="{{ MEDIA_URL }}js/excanvas.js"></script>
+    <script src="{{ MEDIA_URL }}js/drawnby.js"></script>
+    {% endcompress %}
+    {% compress css %}
+    <link href="{{ MEDIA_URL }}css/drawnby.css" rel="stylesheet">
+    {% endcompress %}
+</head>
 <body>
 
 {% for message in messages %}
