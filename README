@@ -10,4 +10,6 @@ wget http://redis.googlecode.com/files/redis-2.2.12.tar.gz
 tar -xf redis-2.2.12.tar.gz
 cd redis-2.2.12
 sudo make
-./src/redis-server
+sudo chmod +x ./src/redis-server
+sudo cp redis-2.2.12/src/redis-server /usr/bin/
+
