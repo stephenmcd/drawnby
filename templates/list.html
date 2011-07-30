@@ -2,6 +2,7 @@
 
 {% block main %}
 {% for drawing in drawings %}
+<img src="{{ drawing.data }}" width="100"><br>
 <a href="{% url view drawing.slug %}">{{ drawing }}</a><br>
 {% endfor %}
 {% endblock %}
