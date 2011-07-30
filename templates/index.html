@@ -2,5 +2,7 @@
 
 {% block main %}
 Login via:<br>
-<a href="{% url begin "twitter" %}">Twitter</a> / <a href="{% url begin "facebook" %}">Facebook</a>
+{% with request.GET.next as next %}
+<a href="{% url login "twitter" %}?next={{ next }}">Twitter</a> / <a href="{% url login "facebook" %}?next={{ next }}">Facebook</a>
+{% endwith %}
 {% endblock %}

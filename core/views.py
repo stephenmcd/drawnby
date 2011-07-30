@@ -81,6 +81,14 @@ def drawing_list(request, template="list.html"):
     context = {"drawings": Drawing.objects.all()}
     return render(request, template, context)
 
+def login(request, provider):
+    """
+    Login - store the next param as a cookie since session may be lost.
+    """
+    response = redirect("begin", provider)
+    response.set_cookie("next", request.GET.get("next", ""))
+    return response
+
 def loggedin(request):
     """
     social-auth callback redirected to when user logs in.
