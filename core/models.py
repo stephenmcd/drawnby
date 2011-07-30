@@ -14,7 +14,7 @@ class Drawing(models.Model):
     users = models.ManyToManyField("auth.User")
     title = models.CharField(max_length=50)
     slug = models.SlugField(blank=True, null=True)
-    data = models.TextField()
+    data = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

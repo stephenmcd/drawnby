@@ -85,9 +85,9 @@ def drawing_view(request, slug, template="view.html"):
 
 def drawing_list(request, template="list.html"):
     """
-    List all drawings.
+    List all completed drawings.
     """
-    context = {"drawings": Drawing.objects.all()}
+    context = {"drawings": Drawing.objects.filter(data__isnull=False)}
     return render(request, template, context)
 
 def login(request, provider):

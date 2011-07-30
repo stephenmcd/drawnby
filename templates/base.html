@@ -20,7 +20,18 @@
 {% endfor %}
 
 <ul>
-    <li><a href="{% url list %}">View all</a></li>
+    <li><a href="{% url list %}">View Completed</a></li>
+    <li>
+        <select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
+            <option>Join a drawing in progress</option>
+            {% load_in_progress %}
+            {% for drawing in progress %}
+            {% with drawing.users.count as users %}
+            <option value="{% url edit drawing.slug %}">{{ drawing }} ({{ users }} contributor{{ user|pluralize }})</option>
+            {% endwith %}
+            {% endfor %}
+        </select>
+    </li>
     <li><a href="{% url new %}">New</a></li>
     {% if request.user.is_authenticated %}
     {% with request.user|photo_for_user as user_photo %}
