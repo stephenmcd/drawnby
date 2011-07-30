@@ -133,4 +133,10 @@ $(function() {
         }
     });
 
+    // Explict save
+    $('#save').click(function() {
+        socket.send([window.drawingID, 'save', canvas.get()[0].toDataURL('image/png')])
+        return false;
+    });
+
 });

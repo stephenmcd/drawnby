@@ -56,6 +56,11 @@ def socketio(request):
                         drawing.data = image.replace(" ", "+")
                         drawing.save()
                         r.delete(drawing_key)
+                elif action == "save":
+                    drawing = Drawing.objects.get(id=drawing_id)
+                    drawing.data = message[2].replace(" ", "+")
+                    drawing.save()
+                    continue
                 else:
                     # Add the draw action.
                     r.rpush(drawing_key, ",".join(message))
