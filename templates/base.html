@@ -24,7 +24,7 @@
     <li><a href="{% url list %}">View all</a></li>
     <li><a href="{% url new %}">New</a></li>
     {% if request.user.is_authenticated %}
-    <li><a href="{% url logout %}">Logout</a></li>
+    <li>Logged in as {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
     {% endif %}
 </ul>
 

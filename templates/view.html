@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block main %}
-<script>window.drawingID = {{ drawing.id }};</script>
+<script>
+    window.drawingID = {{ drawing.id }};
+    window.username = '{{ request.user.username|escapejs }}';
+    window.userID = {{ request.user.id }};
+</script>
 <h1>{{ drawing }}</h1>
 <canvas id="canvas" width="600" height="330"></canvas>
+<ul id="users"></ul>
 {% endblock %}
