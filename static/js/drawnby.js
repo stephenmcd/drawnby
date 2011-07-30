@@ -20,8 +20,10 @@ $(function() {
     };
 
     var action = function(args) {
-        var action = actions[args.shift()];
-        action.apply(null, args);
+        if (args.shift() == window.drawingID) {
+            var action = actions[args.shift()];
+            action.apply(null, args);
+        }
     };
 
     var getCoords = function(event) {
@@ -36,8 +38,13 @@ $(function() {
     });
 
     var send = function() {
-        action($.makeArray(arguments));
-        socket.send($.makeArray(arguments));
+        var getArgs = function(args) {
+            args = $.makeArray(args);
+            args.unshift(window.drawingID);
+            return args;
+        };
+        action(getArgs(arguments));
+        socket.send(getArgs(arguments));
     };
 
     canvas.mouseup(function() {

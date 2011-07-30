@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block main %}
+<script>window.drawingID = {{ drawing.id }};</script>
 <h1>{{ drawing }}</h1>
 <canvas id="canvas" width="600" height="330"></canvas>
 {% endblock %}
