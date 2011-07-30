@@ -20,6 +20,14 @@
 <p>{{ message }}</p>
 {% endfor %}
 
+<ul>
+    <li><a href="{% url list %}">View all</a></li>
+    <li><a href="{% url new %}">New</a></li>
+    {% if request.user.is_authenticated %}
+    <li><a href="{% url logout %}">Logout</a></li>
+    {% endif %}
+</ul>
+
 {% block main %}{% endblock %}
 
 </body>

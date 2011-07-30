@@ -86,7 +86,7 @@ FACEBOOK_APP_ID          = ""
 FACEBOOK_API_SECRET      = ""
 FACEBOOK_EXTENDED_PERMISSIONS = ["email", "offline_access", "publish_stream"]
 
-LOGIN_URL          = '/auth/'
+LOGIN_URL          = '/'
 LOGIN_REDIRECT_URL = '/auth/loggedin/'
 LOGIN_ERROR_URL    = '/auth/error/'
 

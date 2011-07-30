@@ -16,6 +16,7 @@ def drawing_new(request, template="new.html"):
             drawing = form.save()
             drawing.users.add(request.user)
             drawing.save()
+            messages.success(request, "Drawing created")
             return redirect(drawing)
     context = {"form": form}
     return render(request, template, context)
