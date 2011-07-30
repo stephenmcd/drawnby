@@ -9,7 +9,7 @@ from core.models import Drawing
 
 
 @login_required
-def new(request, template="new.html"):
+def drawing_new(request, template="new.html"):
     form = DrawingForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
@@ -21,9 +21,13 @@ def new(request, template="new.html"):
     return render(request, template, context)
 
 @login_required
-def view(request, slug, template="view.html"):
+def drawing_view(request, slug, template="view.html"):
     drawing = get_object_or_404(Drawing, slug=slug)
     context = {"drawing": drawing}
+    return render(request, template, context)
+
+def drawing_list(request, template="list.html"):
+    context = {"drawings": Drawing.objects.all()}
     return render(request, template, context)
 
 def loggedin(request):
