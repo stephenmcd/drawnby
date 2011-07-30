@@ -2,11 +2,23 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from core.forms import DrawingForm
 from core.models import Drawing
 
+
+def socketio(request):
+    socket = request.environ["socketio"]
+    while True:
+        message = socket.recv()
+        if len(message) > 0:
+            socket.broadcast(message)
+        else:
+            if not socket.connected():
+                break
+    return HttpResponse("")
 
 @login_required
 def drawing_new(request, template="new.html"):
