@@ -29,6 +29,17 @@ $(function() {
             context.stroke();
         },
 
+        load: function(imageData) {
+            img = new Image();
+            var interval = setInterval(function() {
+                if (img.complete) {
+                    context.drawImage(img, 0, 0);
+                    clearTimeout(interval);
+                }
+            }, 100);
+            img.src = imageData;
+        },
+
         // User joining - add their name to the user list.
         join: function(username, userID) {
             if ($('#user-' + userID).length == 0) {

@@ -36,8 +36,16 @@ def socketio(request):
                     # Get all the draw actions.
                     drawing_actions = [s for m in r.lrange(drawing_key, 0, -1)
                                        for s in m.split(",")]
+                    # If there are no actions, check to see if the drawing
+                    # data has been saved, and create the initial load
+                    # action for the data.
+                    if not drawing_actions:
+                        drawing = Drawing.objects.get(id=drawing_id)
+                        if drawing.data:
+                            drawing_actions = [drawing_id, "load", drawing.data]
+                            r.rpush(drawing_key, ",".join(drawing_actions))
                     # Dump the combined action list to the joining user.
-                    socket.send(drawing_actions + user_actions)
+                    socket.send(user_actions + drawing_actions)
                 elif action == "leave":
                     image = message.pop(2)
                     # Remove the user from the user set.
@@ -45,8 +53,9 @@ def socketio(request):
                     # Store the image data if no more users.
                     if len(r.smembers(users_key)) == 0:
                         drawing = Drawing.objects.get(id=drawing_id)
-                        drawing.data = image
+                        drawing.data = image.replace(" ", "+")
                         drawing.save()
+                        r.delete(drawing_key)
                 else:
                     # Add the draw action.
                     r.rpush(drawing_key, ",".join(message))
