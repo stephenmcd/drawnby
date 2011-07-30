@@ -8,5 +8,5 @@ django-pagination==1.0.7
 supervisor==3.0a10
 elementtree==1.2.7-20070827-preview
 gevent==0.13.6
-hg+https://bitbucket.org/Jeffrey/gevent-websocket@stable#egg=gevent-websocket
-hg+https://bitbucket.org/Jeffrey/gevent-socketio#egg=gevent-socketio
+-e hg+https://bitbucket.org/Jeffrey/gevent-websocket@stable#egg=gevent-websocket
+-e hg+https://bitbucket.org/Jeffrey/gevent-socketio#egg=gevent-socketio
