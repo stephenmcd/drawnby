@@ -30,7 +30,8 @@ def install():
 
 def restart():
     with cd(PROJECT_DIRNAME):
-        sudo("supervisorctl restart drawnby_app")
+        sudo("supervisorctl stop drawnby_app")
+        sudo("supervisorctl start drawnby_app")
 
 def deploy():
     push()
