@@ -1,10 +1,17 @@
 {% load thumbnail core_tags %}
-<html>
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
-    {% load compress %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>DrawnBy - Collaborative creativity</title>
+
+ {% load compress %}
     {% compress js %}
     <script>window.MEDIA_URL = '{{ MEDIA_URL }}';</script>
-    <script src="{{ MEDIA_URL }}js/jquery.js"></script>
+    <script src="{{ MEDIA_URL }}js/modernizr-1.7.min.js"></script>
+	<script src="{{ MEDIA_URL }}js/jquery.js"></script>
     <script src="{{ MEDIA_URL }}js/jquery.tools.js"></script>
     {% block extra_js %}{% endblock %}
     {% endcompress %}
@@ -12,35 +19,53 @@
     <link href="{{ MEDIA_URL }}css/drawnby.css" rel="stylesheet">
     {% block extra_css %}{% endblock %}
     {% endcompress %}
+  <script src="js/libs/modernizr-1.7.min.js"></script>
+
 </head>
 <body>
 
-{% for message in messages %}
-<p>{{ message }}</p>
-{% endfor %}
+	{% for message in messages %}
+	<p>{{ message }}</p>
+	{% endfor %}
 
-<ul>
-    <li><a href="{% url list %}">View Completed</a></li>
-    <li>
-        <select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
-            <option>Join a drawing in progress</option>
-            {% load_in_progress %}
-            {% for drawing in progress %}
-            {% with drawing.users.count as users %}
-            <option value="{% url edit drawing.slug %}">{{ drawing }} ({{ users }} contributor{{ user|pluralize }})</option>
-            {% endwith %}
-            {% endfor %}
-        </select>
-    </li>
-    <li><a href="{% url new %}">New</a></li>
-    {% if request.user.is_authenticated %}
-    {% with request.user|photo_for_user as user_photo %}
-    <li>Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
-    {% endwith %}
-    {% endif %}
-</ul>
-
-{% block main %}{% endblock %}
-
+	<ul>
+		<li><a href="{% url list %}">View Completed</a></li>
+		<li>
+			<select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
+				<option>Join a drawing in progress</option>
+				{% load_in_progress %}
+				{% for drawing in progress %}
+				{% with drawing.users.count as users %}
+				<option value="{% url edit drawing.slug %}">{{ drawing }} ({{ users }} contributor{{ user|pluralize }})</option>
+				{% endwith %}
+				{% endfor %}
+			</select>
+		</li>
+		<li><a href="{% url new %}">New</a></li>
+		{% if request.user.is_authenticated %}
+		{% with request.user|photo_for_user as user_photo %}
+		<li>Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
+		{% endwith %}
+		{% endif %}
+	</ul>
+	
+	<div class="container">
+		<header>
+			<a href="#"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
+			<nav>
+				<ul>
+					<li><a href="#">New Sketch</a></li>
+					<li><a href="#">View Gallery</a></li>
+					<li><a href="#">About</a></li>
+				</ul>
+			</nav>
+		</header>
+	{% block main %}
+	
+	
+	
+	
+	{% endblock %}
+	</div>
 </body>
 </html>
