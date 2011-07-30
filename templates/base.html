@@ -10,7 +10,6 @@
  {% load compress %}
     {% compress js %}
     <script>window.MEDIA_URL = '{{ MEDIA_URL }}';</script>
-    <script src="{{ MEDIA_URL }}js/modernizr-1.7.min.js"></script>
 	<script src="{{ MEDIA_URL }}js/jquery.js"></script>
     <script src="{{ MEDIA_URL }}js/jquery.tools.js"></script>
     {% block extra_js %}{% endblock %}
