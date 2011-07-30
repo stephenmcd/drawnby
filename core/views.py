@@ -25,19 +25,28 @@ def socketio(request):
             if len(message) > 0:
                 drawing_id, action = message[:2]
                 drawing_key = "drawing-%s" % drawing_id
-                user_key = "users-%s" % drawing_id
+                users_key = "users-%s" % drawing_id
                 if action == "join":
                     # Add the user to the user set.
-                    r.sadd(user_key, ",".join(message[2:]))
-                    # Get all users with args prepended to look like join actions.
-                    user_actions = [s for m in r.smembers(user_key) for s in [drawing_id, "join"] + m.split(",")]
+                    r.sadd(users_key, ",".join(message[2:]))
+                    # Get all users with args prepended,
+                    # to look like join actions.
+                    user_actions = [s for m in r.smembers(users_key)
+                                    for s in [drawing_id, "join"] + m.split(",")]
                     # Get all the draw actions.
-                    drawing_actions = [s for m in r.lrange(drawing_key, 0, -1) for s in m.split(",")]
+                    drawing_actions = [s for m in r.lrange(drawing_key, 0, -1)
+                                       for s in m.split(",")]
                     # Dump the combined action list to the joining user.
                     socket.send(drawing_actions + user_actions)
                 elif action == "leave":
+                    image = message.pop(2)
                     # Remove the user from the user set.
-                    r.srem(user_key, ",".join(message[2:]))
+                    r.srem(users_key, ",".join(message[2:]))
+                    # Store the image data if no more users.
+                    if len(r.smembers(users_key)) == 0:
+                        drawing = Drawing.objects.get(id=drawing_id)
+                        drawing.data = image
+                        drawing.save()
                 else:
                     # Add the draw action.
                     r.rpush(drawing_key, ",".join(message))

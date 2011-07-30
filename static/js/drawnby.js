@@ -2,7 +2,7 @@ $(function() {
 
     // Set up the canvas context.
     var canvas = $('#canvas');
-    var context = document.getElementById('canvas').getContext('2d');
+    var context = canvas.get()[0].getContext('2d');
     context.width = canvas.width();
     context.height = canvas.height();
     context.lineCap = 'round';
@@ -89,9 +89,10 @@ $(function() {
         send('join');
     });
     $(window).unload(function() {
-        send('leave');
+        send('leave', canvas.get()[0].toDataURL('image/png'));
     });
     socket.on('message', function(args) {
+        $('#loading').remove();
         action(args);
     });
 

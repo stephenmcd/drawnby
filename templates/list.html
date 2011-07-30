@@ -2,6 +2,6 @@
 
 {% block main %}
 {% for drawing in drawings %}
-<a href="{% url view drawing %}">{{ drawing }}</a><br>
+<a href="{% url view drawing.slug %}">{{ drawing }}</a><br>
 {% endfor %}
 {% endblock %}
