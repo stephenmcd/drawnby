@@ -79,6 +79,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+# Set these in local_settings.py
 TWITTER_CONSUMER_KEY     = ""
 TWITTER_CONSUMER_SECRET  = ""
 FACEBOOK_APP_ID          = ""

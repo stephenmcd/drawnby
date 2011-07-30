@@ -1,6 +1,12 @@
 <html>
 <head></head>
 <body>
+
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+
 {% block main %}{% endblock %}
+
 </body>
 </html>
