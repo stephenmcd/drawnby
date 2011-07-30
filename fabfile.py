@@ -30,7 +30,7 @@ def install():
 
 def restart():
     with cd(PROJECT_DIRNAME):
-        run("supervisorctl restart drawnby:drawnby_app")
+        run("supervisorctl restart drawnby_app")
 
 def deploy():
     push()
