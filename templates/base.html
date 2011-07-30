@@ -6,13 +6,11 @@
     <script>window.MEDIA_URL = '{{ MEDIA_URL }}';</script>
     <script src="{{ MEDIA_URL }}js/jquery.js"></script>
     <script src="{{ MEDIA_URL }}js/jquery.tools.js"></script>
-    <script src="{{ MEDIA_URL }}js/json.js"></script>
-    <script src="{{ MEDIA_URL }}js/socket.io.js"></script>
-    <script src="{{ MEDIA_URL }}js/excanvas.js"></script>
-    <script src="{{ MEDIA_URL }}js/drawnby.js"></script>
+    {% block extra_js %}{% endblock %}
     {% endcompress %}
     {% compress css %}
     <link href="{{ MEDIA_URL }}css/drawnby.css" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
     {% endcompress %}
 </head>
 <body>

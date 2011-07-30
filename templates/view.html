@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block extra_js %}
+<script src="{{ MEDIA_URL }}js/json.js"></script>
+<script src="{{ MEDIA_URL }}js/socket.io.js"></script>
+<script src="{{ MEDIA_URL }}js/excanvas.js"></script>
+<script src="{{ MEDIA_URL }}js/drawnby.js"></script>
+{% endblock %}
+
 {% block main %}
 <script>
     window.drawingID = {{ drawing.id }};
