@@ -1,13 +1,14 @@
-`DrawnBy`_ is a collaborative drawing app built for the 2011 `Django Dash`_.
-Users are able to create new drawings which anyone can contribute to in
-real-time. Drawings can then be saved to the DrawnBy gallery where users
-can view and vote on their favourite drawings.
+`DrawnBy`_ is a collaborative drawing app built by `Josh de Blank`_,
+`Travis White`_ and `Stephen McDonald`_ for the 2011 `Django Dash`_.
+Users are able to create new drawings which anyone can contribute to
+in real-time. Drawings can then be saved to the DrawnBy gallery where
+users can view and vote on their favourite drawings.
 
 Technical Overview
 ------------------
 
 Aside from Django, DrawnBy brings together several unique technologies.
-The `HTML5 canvas API`_, is used to implement client-side drawing features.
+The `HTML5 canvas API`_ is used to implement client-side drawing features.
 These interactions are then sent over the wire using `websockets`_
 via `Socket.IO`_. `gevent`_ is used on the server to maintain long running
 requests, and the key-value server `Redis`_ is used to store all drawing
@@ -77,3 +78,6 @@ keys where defined.
 .. _`BitBucket`: https://bitbucket.org/
 .. _`pip`: http://www.pip-installer.org/
 .. _`django documentation`: https://docs.djangoproject.com/en/1.3/ref/databases/
+.. _`Josh de Blank`: http://joshdeblank.com/
+.. _`Travis White`: http://www.traviswhite.com.au/
+.. _`Stephen McDonald`: http://steve.jupo.org/
