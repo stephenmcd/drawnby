@@ -142,6 +142,8 @@ footer span img {margin-right:5px;}
 .toolbar .eyedrop { background-position: 4px -136px; }
 .toolbar .zoom { background-position: 4px -170px; }
 .toolbar a:hover { background-color: #8a8a8a; }
+.brushsize  { height: 80px; margin: 10px auto 15px; }
+#amount { text-align: center;  }
 
 .functions { display: inline-block; width: 200px; border-left: 2px solid #fff; text-align: center; }
 .functions a { display: inline-block; width: 20px; height: 20px; margin: 10px 2px 10px 3px; background: #cbcbcb url('../img/sp-functions.png') no-repeat 0 0; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
@@ -153,7 +155,7 @@ footer span img {margin-right:5px;}
 .functions .delete { background-position: -121px 4px; }
 .functions a:hover { background-color: #8a8a8a; }
 
-.userslist { display: inline-block; width: 360px; height: 40px; padding-left: 10px; border-left: 2px solid #fff; }
+.userslist { display: inline-block; width: 360px; height: 40px; margin-left: 10px; padding-left: 10px; border-left: 2px solid #fff; }
 .rating { display: inline-block; width: 150px; padding-left: 10px; border-left: 2px solid #fff; } 
 
 #users, #users li {display:inline; margin:0;}
@@ -161,10 +163,8 @@ footer span img {margin-right:5px;}
 span.users {margin-left:20px;}
 span.sep {margin:0 10px;}
 
-
 nav .progress {display:inline-block; text-align:left; padding-right:13px;}
 #progress {width:230px;}
-
 
 #canvas { border:1px solid #333; cursor: url('../img/cursor_canvas.png'), pointer; }
 #palette { cursor: url('../img/cursor_palette.png'), pointer; } /* need to make this */
