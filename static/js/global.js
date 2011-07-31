@@ -26,7 +26,7 @@ $(function() {
     messages.show();
     $('#progress').chosen().change(function() {
         if (this.selectedIndex > 0) {
-            location = this[this.selectedIndex].value;
+            location = this[this.selectedIndex].value + '?join';
         }
     });
 });

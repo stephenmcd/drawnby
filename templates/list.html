@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load pagination_tags %}
 
+{% block body_class %}gallery{% endblock %}
+
 {% block main %}
 {% autopaginate drawings 10 %}
 <div class="clearfix gallery-items">
     {% for drawing in drawings %}
     <div>
-        <img src="{{ drawing.data }}">
-        <a href="{% url view drawing.slug %}">{{ drawing }}</a><br>
+        <a href="{% url view drawing.slug %}"><img src="{{ drawing.data }}">{{ drawing }}</a><br>
         {% include "rating.html" %}
     </div>
     {% endfor %}

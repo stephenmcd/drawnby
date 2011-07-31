@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
+{% block body_class %}gallery{% endblock %}
+
 {% block main %}
 <h1>{{ drawing }}</h1>
-<img src="{{ drawing.data }}" width="600" height="330">
+<img class="complete" src="{{ drawing.data }}" width="850" height="400">
 {% endblock %}
 
 {% block footer %}{% include "drawing_footer.html" %}{% endblock %}

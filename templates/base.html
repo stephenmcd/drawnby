@@ -21,7 +21,7 @@
     {% block extra_js %}{% endblock %}
     {% endcompress %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
     <div id="messages">
         {% for message in messages %}
@@ -50,14 +50,13 @@
 		                    {% endfor %}
 	                    </select>
 	                </li>
-					<li class="button"><a href="{% url new %}">New Sketch</a></li>
-					<li class="button"><a href="{% url list %}">View Gallery</a></li>
-					<li class="button"><a href="{% url about %}">About</a></li>
+					<li class="button"><a id="nav-new" href="{% url new %}">New Sketch</a></li>
+					<li class="button"><a id="nav-gallery" href="{% url list %}">View Gallery</a></li>
+					<li class="button"><a id="nav-about" href="{% url about %}">About</a></li>
 				</ul>
 			</nav>
 		</header>
-	    {% block main %}
-	    {% endblock %}
+		<div id="main">{% block main %}{% endblock %}</div>
         <footer>
             {% if request.user.is_authenticated %}
 	            {% with request.user|photo_for_user as user_photo %}

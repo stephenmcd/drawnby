@@ -14,14 +14,14 @@
 <link href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet">
 {% endblock %}
 
+{% block body_class %}{% if request.META.QUERY_STRING != "join" %}new{% endif %}{% endblock %}
+
 {% block main %}
 <script>
     window.drawingKey = '{{ drawing_key }}';
     window.username = '{{ request.user.username|escapejs }}';
     window.userID = {{ request.user.id }};
 </script>
-<input
-<p id="loading">Loading...</p>
 
 <div class="toolbar">
 	<a href="" title="Save" class="ir save">Save</a>
@@ -32,7 +32,8 @@
 	<a href="" id="color" class="ir"><div></div></a>
 </div>
 
-<canvas selectable="no" id="canvas" width="900" height="450"></canvas>
+<p id="loading" class="intro">Loading...</p>
+<canvas id="canvas" width="850" height="400"></canvas>
 
 {% endblock %}
 
