@@ -1,7 +1,9 @@
 {% spaceless %}
+<span class="stars">
 {% for score in "12345" %}
 {% with score|get_digit:1 as score %}
-<a href="{% url rate drawing.id score %}?next={{ request.path }}{% if request.GET.page %}?page={{ request.GET.page }}{% endif %}" class="star-{% if score <= drawing.rating.score %}on{% else %}off{% endif %}">&#9733;</a>
+<a href="{% url rate drawing.id score %}?next={{ request.path }}{% if request.GET.page %}?page={{ request.GET.page }}{% endif %}" class="star-{% if score <= drawing.rating.score %}on{% else %}off{% endif %}{% if score = drawing.rating.score %} actual{% endif %}">&#9733;</a>
 {% endwith %}
 {% endfor %}
+</span>
 {% endspaceless %}

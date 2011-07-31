@@ -29,4 +29,30 @@ $(function() {
             location = this[this.selectedIndex].value + '?join';
         }
     });
+    $('.stars a').mouseover(function() {
+        var stars = $(this).parent().find('a');
+        stars.addClass('star-off');
+        stars.removeClass('star-on');
+        for (var i = 0; i < stars.length; i++) {
+            $(stars[i]).addClass('star-on');
+            $(stars[i]).removeClass('star-off');
+            if (stars[i] == this) {
+                break;
+            }
+        }
+    });
+    $('.stars a').mouseout(function() {
+        var stars = $(this).parent().find('a');
+        stars.addClass('star-off');
+        stars.removeClass('star-on');
+        for (var i = 0; i < stars.length; i++) {
+            $(stars[i]).addClass('star-on');
+            $(stars[i]).removeClass('star-off');
+            if ($(stars[i]).hasClass('actual')) {
+                return;
+            }
+        }
+        stars.addClass('star-off');
+        stars.removeClass('star-on');
+    });
 });
