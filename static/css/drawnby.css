@@ -141,6 +141,7 @@ footer span img {margin-right:5px;}
 .toolbar .cut { background-position: 4px -101px; }
 .toolbar .eyedrop { background-position: 4px -136px; }
 .toolbar .zoom { background-position: 4px -170px; }
+.functions .save { background-position: 4px -200px; }
 .toolbar a:hover { background-color: #8a8a8a; }
 .brushsize  { height: 80px; margin: 10px auto 15px; }
 #amount { position: relative; }
