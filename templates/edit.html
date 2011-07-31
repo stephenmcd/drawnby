@@ -40,26 +40,6 @@ Size:
     {% endfor %}
 </ul>
 
-<footer>
-	<div class="userslist">
-		People in this sketch:
-		<ul id="users"></ul>
-		<script id="user-template" type="text/x-jquery-tmpl">
-			<li id="user-${userID}">
-				<img src="${window.MEDIA_URL}photos/${userID}.20x20_q85_crop-smart.jpg">
-				${username}
-			</li>
-		</script>
-	</div>
-	<div class="functions">
-		<ul>
-			<li><a href="" title="Save" class="ir save">Save</a></li>
-			<li><a href="" title="Print" class="ir print">Print</a></li>
-			<li><a href="" title="Email" class="ir email">Email</a></li>
-			<li><a href="" title="Undo" class="ir undo">Undo</a></li>
-			<li><a href="" title="Download" class="ir download">Download</a></li>
-			<li><a href="" title="Delete" class="ir delete">Delete</a></li>
-		</ul>
-	</div>
-</footer>
+{% include "footer.html" %}
+
 {% endblock %}

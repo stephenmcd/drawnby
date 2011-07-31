@@ -1,15 +1,7 @@
 {% extends "base.html" %}
-{% load thumbnail core_tags %}
 
 {% block main %}
 <h1>{{ drawing }}</h1>
 <img src="{{ drawing.data }}" width="600" height="330">
-<ul id="users">
-    {% for user in drawing.users.all %}
-	{% with user|photo_for_user as user_photo %}
-	<li><img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ user.username }}</li>
-	{% endwith %}
-    {% endfor %}
-</ul>
-{% include "rating.html" %}
+{% include "footer.html" %}
 {% endblock %}
