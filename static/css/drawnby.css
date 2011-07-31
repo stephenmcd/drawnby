@@ -134,6 +134,7 @@ footer * {vertical-align:middle; color:#572b80; font-size:13px;}
 #users, #users li {display:inline; margin:0;}
 #users img {margin-top:-8px;}
 #users .username {display:none;}
+span.rating {margin:0 5px 0 30px;}
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }

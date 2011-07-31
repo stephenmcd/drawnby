@@ -16,4 +16,7 @@ $(function() {
     <script id="user-template" type="text/x-jquery-tmpl">
         <li id="user-${userID}"><img title="${username}" src="${window.MEDIA_URL}photos/${userID}.20x20_q85_crop-smart.jpg"></li>
     </script>
+    {% if drawing %}
+    <span class="rating">Rating:</span>{% include "rating.html" %}
+    {% endif %}
 </footer><br>
