@@ -123,7 +123,7 @@ $(function() {
         send('join');
     });
     $(window).unload(function() {
-        if (dirty) {
+        if (dirty && confirm('You have unsaved changed, would you like to save them?')) {
             save();
         }
         send('leave');
