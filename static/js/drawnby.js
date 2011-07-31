@@ -14,6 +14,9 @@ $(function() {
     // First touch of the canvas flag.
     first = true;
 
+    // Flag to prompt for saving on exit.
+    dirty = false;
+
     // Stores actions that come through when
     // the user is drawing, to be called when
     // drawing is complete.
@@ -106,6 +109,7 @@ $(function() {
             socket.send([window.drawingKey, 'save', title,
                         canvas.get()[0].toDataURL('image/png')])
         }
+        dirty = false;
     };
 
     // Socket.IO setup.
@@ -115,7 +119,9 @@ $(function() {
         send('join');
     });
     $(window).unload(function() {
-        save();
+        if (dirty) {
+            save();
+        }
         send('leave');
     });
     socket.on('message', function(args) {
@@ -148,6 +154,7 @@ $(function() {
         drawing = true;
         send('mousedown', coords.x, coords.y, first);
         first = false;
+        dirty = true;
     });
 
     // Draw on mousemove if drawing is currently on (eg mouse is down).
