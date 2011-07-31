@@ -4,7 +4,7 @@
 
 {% block main %}
 <h1>{{ drawing }}</h1>
-<img class="complete" src="{{ drawing.data }}" width="850" height="400">
+<img class="complete" src="{{ MEDIA_URL }}drawings/{{ drawing.id }}" width="850" height="400">
 {% endblock %}
 
 {% block footer %}{% include "drawing_footer.html" %}{% endblock %}

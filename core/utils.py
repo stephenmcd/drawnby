@@ -69,8 +69,7 @@ class Actions(object):
         """
         Create a drawing object given the title and image data.
         """
-        drawing = Drawing.objects.create(title=message[2],
-                                         data=message[3].replace(" ", "+"))
+        drawing = Drawing.objects.create(title=message[2])
         for user_id in redis.smembers(self.drawers_data_key):
             drawing.users.add(User.objects.get(id=user_id))
         # Save image file for thumbnailing.
@@ -78,7 +77,7 @@ class Actions(object):
         if not exists(path):
             mkdir(path)
         with open(join(path, str(drawing.id)), "wb") as f:
-            f.write(drawing.data.split(",", 1)[1].decode("base64"))
+            f.write(message[3].split(",", 1)[1].replace(" ", "+").decode("base64"))
         return False
 
     def mousedown(self, message):
