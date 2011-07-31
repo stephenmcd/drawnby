@@ -185,36 +185,12 @@ $(function() {
         return false;
     });
 
-    // Color palette setup - load the palette graphic into a canvas
-    // that we can use to read pixel colors from.
-    var palette = $('#palette').get()[0].getContext('2d');
-    var img = new Image();
-    img.onload = function() {
-        palette.drawImage(img, 0, 0, img.width, img.height);
-    }
-    img.src = window.MEDIA_URL + 'img/palette.png';
-
-    // Show the color in the selected color panel while moving
-    // around the palette.
-    $('#palette').mousemove(function(event) {
-        var coords = getCoords(this, event);
-        var pixel = palette.getImageData(coords.x, coords.y, 1, 1).data;
-        var rgb = 'rgb(' + $.makeArray(pixel).slice(0, 3).join(',') + ')';
-        $('#color').css({background: rgb});
-    });
-
-    // Reset the color in the selected color panel when mouse
-    // leaves the palette.
-    $('#palette').mouseout(function(event) {
-        $('#color').css({background: 'rgb(' + color.join(',') + ')'});
-    });
-
-    // Set the selected color and the color in the selected
-    // color panel when clicking the palette.
-    $('#palette').click(function(event) {
-        var coords = getCoords(this, event);
-        var pixel = palette.getImageData(coords.x, coords.y, 1, 1).data;
-        color = $.makeArray(pixel).slice(0, 3);
+    // Color picker.
+    $(function() {
+        $('#color').ColorPicker({onChange: function(hsb, hex, rgb) {
+            color = [rgb.r, rgb.g, rgb.b];
+            $('#color div').css({backgroundColor: '#' + hex});
+		}});
     });
 
 });
