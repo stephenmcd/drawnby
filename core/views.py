@@ -114,5 +114,7 @@ def about(request, template="about.html"):
     writer.translator_class = HTMLTranslator
     with open(join(settings.PROJECT_ROOT, "README.rst"), "r") as f:
         about = publish_string(f.read(), writer=writer)
-    context = {"about": about}
+    with open(join(settings.PROJECT_ROOT, "LICENSE"), "r") as f:
+        license = publish_string(f.read(), writer=writer)
+    context = {"about": about, "license": license}
     return render(request, template, context)

@@ -3,5 +3,10 @@
 {% block body_class %}about{% endblock %}
 
 {% block main %}
-<div class="about"><h1>About DrawnBy</h1>{{ about|safe }}</div>
+<div class="about">
+    <h1>About DrawnBy</h1>
+    {{ about|safe }}
+    <h1>License</h1>
+    {{ license|safe }}
+</div>
 {% endblock %}
