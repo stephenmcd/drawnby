@@ -179,12 +179,6 @@ $(function() {
     // Explict save.
     $('#save').click(save);
 
-    // Brush size setup
-    $('#size a').click(function() {
-        size = (Number($(this).attr('id').split('size-')[1]) + 1) * 5;
-        return false;
-    });
-
     // Color picker.
     $(function() {
         $('#color').ColorPicker({onChange: function(hsb, hex, rgb) {
@@ -192,5 +186,17 @@ $(function() {
             $('#color div').css({backgroundColor: '#' + hex});
 		}});
     });
+
+    // Brush size setup
+	$(function() {
+		$('.brushsize').slider({
+			orientation: 'vertical', range: 'max', min: 1, max: 10,
+			slide: function( event, ui ) {
+			    size = ui.value * 5;
+				$('#amount span').html(ui.value);
+			}
+		});
+		$('#amount span').html($('.brushsize').slider('value'));
+	});
 
 });
