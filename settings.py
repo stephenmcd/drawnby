@@ -92,7 +92,7 @@ TWITTER_CONSUMER_KEY     = ""
 TWITTER_CONSUMER_SECRET  = ""
 FACEBOOK_APP_ID          = ""
 FACEBOOK_API_SECRET      = ""
-FACEBOOK_EXTENDED_PERMISSIONS = ["email", "offline_access", "publish_stream"]
+FACEBOOK_EXTENDED_PERMISSIONS = ["offline_access"]
 
 LOGIN_URL          = '/auth/login/'
 LOGIN_REDIRECT_URL = '/auth/loggedin/'
