@@ -58,6 +58,18 @@
 		</header>
 	    {% block main %}
 	    {% endblock %}
+        <footer>
+            {% if request.user.is_authenticated %}
+	            {% with request.user|photo_for_user as user_photo %}
+	            <span><img src="{% thumbnail user_photo 20x20 crop="smart" %}">Welcome, {{ request.user.username }}</span><span class="sep">|</span>
+	            {% endwith %}
+	            <a href="{% url logout %}">Logout</a>
+            {% else %}
+	            <span>Welcome, Guest</span><span class="sep">|</span>
+	            <a href="{% url ">Login</a>
+            {% endif %}
+            {% block footer %}{% endblock %}
+        </footer>
 	</div>
 </body>
 </html>
