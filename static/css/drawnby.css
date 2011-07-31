@@ -143,13 +143,15 @@ div.about h1 {font-size:20px; margin:30px 0 10px 0;}
 .toolbar a { width: 30px; height: 30px; margin: 2px auto 3px auto; background: #cbcbcb url('../img/sp-tools.png') no-repeat 0 0; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
 .toolbar .select { background-position: 4px 5px; }
 .toolbar .pencil { background-position: 4px -31px; }
-.toolbar .brush { background-position: 4px -66px; }
+.toolbar .brush { background-position: 4px -66px; cursor:default;}
 .toolbar .cut { background-position: 4px -101px; }
 .toolbar .eyedrop { background-position: 4px -136px; }
 .toolbar .zoom { background-position: 4px -170px; }
-.functions .save { background-position: 4px -200px; }
+.toolbar .save { background-position: 4px -206px; }
 .toolbar a:hover { background-color: #8a8a8a; }
-.brushsize  { height: 80px; margin: 10px auto 15px; }
+.toolbar .brush:hover {background-color: #cbcbcb !important;}
+.brushsize  { height: 80px; margin: 15px; }
+.brushsize a {cursor:move !important;}
 #amount { position: relative; }
 #amount span { position: absolute; top: -16px; right: 7px; font-size: 10px; font-weight: bold; text-align: center; }
 
