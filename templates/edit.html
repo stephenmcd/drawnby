@@ -16,12 +16,20 @@
 
 <p id="loading">Loading...</p>
 
-<canvas selectable="no" id="canvas" width="600" height="330"></canvas>
+<div class="toolbar">
+	<a href="" title="Select" class="ir select">Select</a>
+	<a href="" title="Pencil" class="ir pencil">Pencil</a>
+	<a href="" title="Brush" class="ir brush">Brush</a>
+	<a href="" title="Cut" class="ir cut">Cut</a>
+	<a href="" title="Eyedropper" class="ir eyedrop">Eyedropper</a>
+	<a href="" title="Zoom" class="ir zoom">Zoom</a>
+</div>
+
+<canvas selectable="no" id="canvas" width="900" height="450"></canvas>
 
 <canvas id="palette" width="100" height="300"></canvas>
 <div id="color" style="width:100px; height:100px;"></div>
 
-<p><a id="save" href="#">Save</a></p>
 
 Size:
 <ul id="size">
@@ -31,6 +39,7 @@ Size:
     {% endwith %}
     {% endfor %}
 </ul>
+
 {% include "footer.html" %}
 
 {% endblock %}
