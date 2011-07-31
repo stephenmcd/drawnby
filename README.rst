@@ -42,6 +42,7 @@ repository with the following command::
 The required Python packages can then be installed via `pip`_ with the
 following command from the newly created ``drawnby`` project directory::
 
+    cd drawnby
     sudo pip install -r requirements.txt
 
 A database is then required. By default DrawnBy is configured for a SQLite
