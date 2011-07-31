@@ -108,7 +108,7 @@ nav .button  a:hover { background: #ed9519; background: -moz-linear-gradient(top
 .message { position:absolute; z-index:1; text-align:center; background:#fff; display:none; color:#000; font-size:14px; top:0; width:100%; height:30px; padding-top:10px; }
 .message a { float:right; text-decoration:none; margin:-4px 10px 0 0; color:#000; font-size:20px; background:#eee; padding:0 8px 4px; }
 
-footer { margin: 10px; min-height: 40px; color: #572b80; font-size: 11px; background: #efefef; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+footer { margin: 10px; padding-left: 10px; min-height: 40px; color: #572b80; font-size: 11px; background: #efefef; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
 footer img {border:1px solid #fff; vertical-align: middle; }
 footer a {color:#f99d1c; font-weight:bold;}
 footer span img {margin-right:5px;}
@@ -129,7 +129,7 @@ footer span img {margin-right:5px;}
 .gallery-items img {display:block;}
 
 	/* Ratings */
-	.star-on, .star-off {text-decoration:none; font-size:20px !important; margin:0;}
+	.star-on, .star-off {text-decoration:none; font-size:18px !important; margin:0;}
 	.star-on {color:yellow;}
     .star-off {color:#aaa;}
 
@@ -153,11 +153,10 @@ footer span img {margin-right:5px;}
 .functions .delete { background-position: -121px 4px; }
 .functions a:hover { background-color: #8a8a8a; }
 
-.userslist { display: inline-block; width: 380px; height: 40px; }
-.rating { display: inline-block; width: 150px; } 
+.userslist { display: inline-block; width: 360px; height: 40px; padding-left: 10px; border-left: 2px solid #fff; }
+.rating { display: inline-block; width: 150px; padding-left: 10px; border-left: 2px solid #fff; } 
 
 #users, #users li {display:inline; margin:0;}
-#users img {margin-top:-8px;}
 #users .username {display:none;}
 span.users {margin-left:20px;}
 span.sep {margin:0 10px;}
