@@ -10,6 +10,8 @@ $(function() {
 
     // Mousedown/drawing flag.
     drawing = false;
+    // First touch of the canvas flag.
+    first = true;
 
     // Container that stores each of the actions so that they can
     // be referenced dynamically by name. Triggered client-side by
@@ -103,7 +105,6 @@ $(function() {
         send('leave');
     });
     socket.on('message', function(args) {
-        console.log(args);
         $('#loading').remove();
         action(args);
     });
@@ -123,7 +124,8 @@ $(function() {
     canvas.mousedown(function(event) {
         var coords = getCoords(event);
         drawing = true;
-        send('mousedown', coords.x, coords.y);
+        send('mousedown', coords.x, coords.y, first);
+        first = false;
     });
 
     // Draw on mousemove if drawing is currently on (eg mouse is down).
