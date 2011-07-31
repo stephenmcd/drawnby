@@ -8,3 +8,4 @@ syntax: glob
 local_settings.py
 static/cache/*
 static/photos/*
+static/drawings/*

@@ -16,6 +16,14 @@ def photo_for_user(user):
     """
     return "photos/%s" % user.id
 
+@register.filter
+def image_for_drawing(drawing):
+    """
+    Just returns the path to the drawing's image since we can't
+    combined values in a template to pass to the thumbnail tag.
+    """
+    return "drawings/%s" % drawing.id
+
 @register.simple_tag(takes_context=True)
 def load_in_progress(context):
     """

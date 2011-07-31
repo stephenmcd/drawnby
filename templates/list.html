@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load pagination_tags %}
+{% load thumbnail core_tags pagination_tags %}
 
 {% block body_class %}gallery{% endblock %}
 
@@ -8,7 +8,9 @@
 <div class="clearfix gallery-items">
     {% for drawing in drawings %}
     <div>
-        <a href="{% url view drawing.slug %}"><img src="{{ drawing.data }}">{{ drawing }}</a><br>
+        {% with drawing|image_for_drawing as drawing_image %}
+        <a href="{% url view drawing.slug %}"><img src="{% thumbnail drawing_image 152x71 %}">{{ drawing }}</a><br>
+        {% endwith %}
         {% include "rating.html" %}
     </div>
     {% endfor %}

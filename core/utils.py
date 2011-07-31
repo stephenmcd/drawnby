@@ -1,4 +1,8 @@
 
+from os import mkdir
+from os.path import join, exists
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from redis import Redis, ConnectionPool
 
@@ -69,6 +73,12 @@ class Actions(object):
                                          data=message[3].replace(" ", "+"))
         for user_id in redis.smembers(self.drawers_data_key):
             drawing.users.add(User.objects.get(id=user_id))
+        # Save image file for thumbnailing.
+        path = join(settings.MEDIA_ROOT, "drawings")
+        if not exists(path):
+            mkdir(path)
+        with open(join(path, str(drawing.id)), "wb") as f:
+            f.write(drawing.data.split(",", 1)[1].decode("base64"))
         return False
 
     def mousedown(self, message):
