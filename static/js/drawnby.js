@@ -10,8 +10,14 @@ $(function() {
 
     // Mousedown/drawing flag.
     drawing = false;
+
     // First touch of the canvas flag.
     first = true;
+
+    // Stores actions that come through when
+    // the user is drawing, to be called when
+    // drawing is complete.
+    var queue = [];
 
     // Container that stores each of the actions so that they can
     // be referenced dynamically by name. Triggered client-side by
@@ -106,7 +112,11 @@ $(function() {
     });
     socket.on('message', function(args) {
         $('#loading').remove();
-        action(args);
+        if (drawing) {
+            queue.push.apply(null, args);
+        } else {
+            action(args);
+        }
     });
 
     // Cross-browser pixel offset.
@@ -115,9 +125,13 @@ $(function() {
         return {x: event.pageX - offset.left, y: event.pageY - offset.top};
     };
 
-    // Stop drawing on mouseup.
+    // Stop drawing on mouseup and run any queued actions.
     canvas.mouseup(function() {
         drawing = false;
+        if (queue.length > 0) {
+            action(queue);
+            queue = [];
+        }
     });
 
     // Start drawing on mousedown.
