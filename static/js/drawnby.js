@@ -8,18 +8,14 @@ $(function() {
     context.lineCap = 'round';
     context.lineJoin = 'round';
 
-    // Mousedown/drawing flag.
-    drawing = false;
+    var drawing = false; // Mousedown/drawing flag.
+    var first = true; // First touch of the canvas flag.
+    var dirty = false; // Flag to prompt for saving on exit.
+    var color = [0,0,0]; // Current drawing rgb.
+    var size = 1; // Current drawing size.
 
-    // First touch of the canvas flag.
-    first = true;
-
-    // Flag to prompt for saving on exit.
-    dirty = false;
-
-    // Stores actions that come through when
-    // the user is drawing, to be called when
-    // drawing is complete.
+    // Stores actions that come through when the user is drawing,
+    // to be called when drawing is complete.
     var queue = [];
 
     // Container that stores each of the actions so that they can
@@ -29,13 +25,17 @@ $(function() {
     var actions = {
 
         // Start drawing.
-        mousedown: function(x, y, username, userID) {
+        mousedown: function(x, y, r, g, b, size, username, userID) {
+            context.lineWidth = size;
+            context.strokeStyle = 'rgba(' + [r, g, b, 1].join(',') + ')';
             context.beginPath();
             context.moveTo(x, y);
         },
 
         // Draw.
-        mousemove: function(x, y, username, userID) {
+        mousemove: function(x, y, r, g, b, size, username, userID) {
+            context.lineWidth = size;
+            context.strokeStyle = 'rgba(' + [r, g, b, 1].join(',') + ')';
             context.lineTo(x, y);
             context.stroke();
         },
@@ -134,8 +134,8 @@ $(function() {
     });
 
     // Cross-browser pixel offset.
-    var getCoords = function(event) {
-        var offset = canvas.offset();
+    var getCoords = function(element, event) {
+        var offset = $(element).offset();
         return {x: event.pageX - offset.left, y: event.pageY - offset.top};
     };
 
@@ -150,9 +150,11 @@ $(function() {
 
     // Start drawing on mousedown.
     canvas.mousedown(function(event) {
-        var coords = getCoords(event);
+        var coords = getCoords(this, event);
         drawing = true;
-        send('mousedown', coords.x, coords.y, first);
+        send('mousedown', coords.x, coords.y,
+                          color[0], color[1], color[2],
+                          size, first);
         first = false;
         dirty = true;
     });
@@ -160,12 +162,52 @@ $(function() {
     // Draw on mousemove if drawing is currently on (eg mouse is down).
     canvas.mousemove(function(event) {
         if (drawing) {
-            var coords = getCoords(event);
-            send('mousemove', coords.x, coords.y);
+            var coords = getCoords(this, event);
+            send('mousemove', coords.x, coords.y,
+                              color[0], color[1], color[2],
+                              size);
         }
     });
 
     // Explict save.
     $('#save').click(save);
+
+    // Brush size setup
+    $('#size a').click(function() {
+        size = (Number($(this).attr('id').split('size-')[1]) + 1) * 5;
+        return false;
+    });
+
+    // Color palette setup - load the palette graphic into a canvas
+    // that we can use to read pixel colors from.
+    var palette = $('#palette').get()[0].getContext('2d');
+    var img = new Image();
+    img.onload = function() {
+        palette.drawImage(img, 0, 0, img.width, img.height);
+    }
+    img.src = window.MEDIA_URL + 'img/palette.png';
+
+    // Show the color in the selected color panel while moving
+    // around the palette.
+    $('#palette').mousemove(function(event) {
+        var coords = getCoords(this, event);
+        var pixel = palette.getImageData(coords.x, coords.y, 1, 1).data;
+        var rgb = 'rgb(' + $.makeArray(pixel).slice(0, 3).join(',') + ')';
+        $('#color').css({background: rgb});
+    });
+
+    // Reset the color in the selected color panel when mouse
+    // leaves the palette.
+    $('#palette').mouseout(function(event) {
+        $('#color').css({background: 'rgb(' + color.join(',') + ')'});
+    });
+
+    // Set the selected color and the color in the selected
+    // color panel when clicking the palette.
+    $('#palette').click(function(event) {
+        var coords = getCoords(this, event);
+        var pixel = palette.getImageData(coords.x, coords.y, 1, 1).data;
+        color = $.makeArray(pixel).slice(0, 3);
+    });
 
 });
