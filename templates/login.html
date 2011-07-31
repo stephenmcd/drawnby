@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block main %}
-<p>Oops! You'll need to login first. Use one of the services below to login.</p>
+<p class="intro">Oops! You'll need to login first. Use one of the services below to login.</p>
 <div class="login-buttons">
 	<a href="{% url begin "twitter" %}"><img src="{{ MEDIA_URL }}img/img-home-twit.png" alt="Login via Twitter"></a>
 	<a href="{% url begin "facebook" %}"><img src="{{ MEDIA_URL }}img/img-home-fb.png" alt="Login via Facebook"></a>

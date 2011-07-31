@@ -84,7 +84,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 body { font-family: Arial, Helvetica, serif; background: url('../img/bg.png'); }
 .container { width: 960px; margin: 50px auto; background: #fff; -webkit-box-shadow: 0px 0px 60px 10px #ffffff; -moz-box-shadow: 0px 0px 60px 10px #ffffff; box-shadow: 0px 0px 60px 10px #ffffff; }
 header { border-bottom: 1px solid #fff; margin-bottom: 12px; background: #572b80; -webkit-box-shadow: 0px 5px 15px 5px #d0d0d0; -moz-box-shadow: 0px 5px 15px 5px #d0d0d0; box-shadow: 0px 5px 15px 5px #d0d0d0; }
-nav { float: right; width: 700px; text-align: right; padding-right:10px;}
+nav { float: right; width: 700px; text-align: right; padding-right:20px;}
 nav .button { display: inline-block; }
 nav .button a { display: block; margin: 28px 5px 0 0; padding: 5px 18px 8px; border: 1px solid #30134c; font-size: 12px; font-weight: bold; color: #fff; text-decoration: none; text-shadow: 0px 1px 2px #292929;
 	-webkit-border-radius: 4px;
@@ -181,10 +181,10 @@ nav .progress {display:inline-block; text-align:left; padding-right:7px;}
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	-webkit-box-shadow: 0px 0px 3px #000000;
-	-moz-box-shadow: 0px 0px 3px #000000;
-	box-shadow: 0px 0px 3px #000000;
-	background:#fff;
+	-webkit-box-shadow: 1px 1px 3px #999999;
+	-moz-box-shadow: 1px 1px 3px #999999;
+	box-shadow: 1px 1px 3px #999999;
+	background:#fff; border:1px solid #ccc;
 }
 
 .pagination { display: inline-block; width: 500px; margin: 10px 20px 0; text-align: center; }
