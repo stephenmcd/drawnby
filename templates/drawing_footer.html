@@ -5,8 +5,7 @@ $(function() {
 });
 </script>
 
-<div class="userslist">
-	<span>People in this sketch:</span>
+	<span class="users">People in this sketch:</span>
 	<ul id="users">
 		{% for u in drawing.users.all %}
 		{% with u|photo_for_user as user_photo %}
@@ -17,12 +16,9 @@ $(function() {
 	<script id="user-template" type="text/x-jquery-tmpl">
 		<li id="user-${userID}"><img title="${username}" src="${window.MEDIA_URL}photos/${userID}.20x20_q85_crop-smart.jpg"></li>
 	</script>
-</div>
-<div class="rating">
 	{% if drawing %}
-	<span>Rating:</span>{% include "rating.html" %}
+	<span class="rate">Rating:</span><span class="stars">{% include "rating.html" %}</span>
 	{% endif %}
-</div>
 <!--
 <div class="functions">
 	<a href="" title="Save" class="ir save">Save</a>
