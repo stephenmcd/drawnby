@@ -100,6 +100,14 @@ $(function() {
         socket.send(getArgs(arguments));
     };
 
+    var save = function() {
+        var title = prompt('Save as:');
+        if (title) {
+            socket.send([window.drawingKey, 'save', title,
+                        canvas.get()[0].toDataURL('image/png')])
+        }
+    };
+
     // Socket.IO setup.
     var socket = new io.Socket();
     socket.connect();
@@ -107,6 +115,7 @@ $(function() {
         send('join');
     });
     $(window).unload(function() {
+        save();
         send('leave');
     });
     socket.on('message', function(args) {
@@ -150,13 +159,6 @@ $(function() {
     });
 
     // Explict save.
-    $('#save').click(function() {
-        var title = prompt('Save as:');
-        if (title) {
-            socket.send([window.drawingKey, 'save', title,
-                        canvas.get()[0].toDataURL('image/png')])
-        }
-        return false;
-    });
+    $('#save').click(save);
 
 });
