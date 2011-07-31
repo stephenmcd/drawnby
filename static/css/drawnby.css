@@ -109,7 +109,7 @@ nav .button  a:hover { background: #ed9519; background: -moz-linear-gradient(top
 .message a { float:right; text-decoration:none; margin:-4px 10px 0 0; color:#000; font-size:20px; background:#eee; padding:0 8px 4px; }
 
 footer { margin: 10px; min-height: 40px; color: #572b80; font-size: 11px; background: #efefef; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
-footer img {border:1px solid #fff;}
+footer img {border:1px solid #fff; vertical-align: middle; }
 footer a {color:#f99d1c; font-weight:bold;}
 footer span img {margin-right:5px;}
 
@@ -153,13 +153,15 @@ footer span img {margin-right:5px;}
 .functions .delete { background-position: -121px 4px; }
 .functions a:hover { background-color: #8a8a8a; }
 
-.userslist { display: inline-block; width: 680px; }
+.userslist { display: inline-block; width: 380px; height: 40px; }
+.rating { display: inline-block; width: 150px; } 
 
 #users, #users li {display:inline; margin:0;}
 #users img {margin-top:-8px;}
 #users .username {display:none;}
 span.users {margin-left:20px;}
 span.sep {margin:0 10px;}
+
 
 nav .progress {display:inline-block; text-align:left; padding-right:13px;}
 #progress {width:230px;}
