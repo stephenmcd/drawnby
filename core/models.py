@@ -14,7 +14,7 @@ class Drawing(models.Model):
     users = models.ManyToManyField("auth.User")
     title = models.CharField(max_length=50)
     slug = models.SlugField(blank=True, null=True)
-    data = models.TextField(null=True)
+    data = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -28,18 +28,19 @@ class Drawing(models.Model):
         return ("view", (self.slug,))
 
     def save(self, *args, **kwargs):
-        i = 0
-        self.slug = slugify(self.title)
-        while True:
-            if i > 0:
-                if i > 1:
-                    self.slug = self.slug.rsplit("-", 1)[0]
-                self.slug = "%s-%s" % (self.slug, i)
-            try:
-                Drawing.objects.exclude(id=self.id).get(slug=self.slug)
-            except Drawing.DoesNotExist:
-                break
-            i += 1
+        if not self.slug:
+            i = 0
+            self.slug = slugify(self.title)
+            while True:
+                if i > 0:
+                    if i > 1:
+                        self.slug = self.slug.rsplit("-", 1)[0]
+                    self.slug = "%s-%s" % (self.slug, i)
+                try:
+                    Drawing.objects.exclude(id=self.id).get(slug=self.slug)
+                except Drawing.DoesNotExist:
+                    break
+                i += 1
         super(Drawing, self).save(*args, **kwargs)
 
 def create_profile(sender, user, response, details, **kwargs):
