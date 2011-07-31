@@ -29,9 +29,11 @@
 				<option>Join a drawing in progress</option>
 				{% load_in_progress %}
 				{% for drawing in progress %}
-				{% with drawing.users.count as users %}
-				<option value="{% url edit drawing.slug %}">{{ drawing }} ({{ users }} contributor{{ user|pluralize }})</option>
-				{% endwith %}
+				<option value="{% url edit drawing.key %}">
+				    {% for u in drawing.users %}
+				    {{ u }}{% if not forloop.last %},{% endif %}
+				    {% endfor %}
+				</option>
 				{% endfor %}
 			</select>
 		</li>
