@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block extra_js %}
+<script src="{{ MEDIA_URL }}js/json.js"></script>
+<script src="{{ MEDIA_URL }}js/socket.io.js"></script>
+<script src="{{ MEDIA_URL }}js/excanvas.js"></script>
+<script src="{{ MEDIA_URL }}js/drawnby.js"></script>
+{% endblock %}
+
+{% block main %}
+<script>
+    window.drawingKey = {{ drawing_key }};
+    window.username = '{{ request.user.username|escapejs }}';
+    window.userID = {{ request.user.id }};
+</script>
+<h1>{{ drawing }}</h1>
+<p id="loading">Loading...</p>
+<canvas id="canvas" width="600" height="330"></canvas>
+<a id="save" href="#">Save</a>
+<ul id="users"></ul>
+{% endblock %}

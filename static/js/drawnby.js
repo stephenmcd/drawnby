@@ -59,7 +59,7 @@ $(function() {
     };
 
     // Takes an array of args that represent one or more actions to call.
-    // First arg is always the drawing ID as a guard to ensure actions are
+    // First arg is always the drawing key as a guard to ensure actions are
     // only performed for the current drawing. Second arg is the act‭ion name
     // and the rest are args for that action. Since many sets of actions
     // can be sent from the server in one batch, we keep looping and test
@@ -68,7 +68,7 @@ $(function() {
     // is empty.
     var action = function(args) {
         while (args.length > 0) {
-            if (args.shift() == window.drawingID) {
+            if (args.shift() == window.drawingKey) {
                 var action = actions[args.shift()];
                 var argLength = action.prototype.constructor.length;
                 action.apply(null, args.slice(0, argLength));
@@ -78,14 +78,14 @@ $(function() {
     };
 
     // The main handler for actions triggered client-side.
-    // First wrap the arguments with the drawing ID and user vars,
+    // First wrap the arguments with the drawing key and user vars,
     // perform the actual action client-side, and pass the action
     // and arguments off to the server via socket.io for broadcasting
     // to other users.
     var send = function() {
         var getArgs = function(args) {
             args = $.makeArray(args);
-            args.unshift(window.drawingID);
+            args.unshift(window.drawingKey);
             args.push(window.username, window.userID);
             return args;
         };
@@ -100,7 +100,7 @@ $(function() {
         send('join');
     });
     $(window).unload(function() {
-        send('leave', canvas.get()[0].toDataURL('image/png'));
+        send('leave');
     });
     socket.on('message', function(args) {
         $('#loading').remove();
@@ -133,9 +133,13 @@ $(function() {
         }
     });
 
-    // Explict save
+    // Explict save.
     $('#save').click(function() {
-        socket.send([window.drawingID, 'save', canvas.get()[0].toDataURL('image/png')])
+        var title = prompt('Save as:');
+        if (title) {
+            socket.send([window.drawingKey, 'save', title,
+                        canvas.get()[0].toDataURL('image/png')])
+        }
         return false;
     });
 

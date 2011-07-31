@@ -1,11 +1,14 @@
 
-import redis
+from random import choice
+from string import letters, digits
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+import redis
 
 from core.forms import DrawingForm
 from core.models import Drawing
@@ -23,47 +26,35 @@ def socketio(request):
         while True:
             message = socket.recv()
             if len(message) > 0:
-                drawing_id, action = message[:2]
-                drawing_key = "drawing-%s" % drawing_id
-                users_key = "users-%s" % drawing_id
+                drawing_key, action = message[:2]
+                drawing_data_key = "drawing-%s" % drawing_key
+                user_data_key = "users-%s" % drawing_key
                 if action == "join":
                     # Add the user to the user set.
-                    r.sadd(users_key, ",".join(message[2:]))
+                    r.sadd(user_data_key, ",".join(message[2:]))
                     # Get all users with args prepended,
                     # to look like join actions.
-                    user_actions = [s for m in r.smembers(users_key)
-                                    for s in [drawing_id, "join"] + m.split(",")]
+                    user_actions = [s for m in r.smembers(user_data_key)
+                                    for s in [drawing_key, "join"] + m.split(",")]
                     # Get all the draw actions.
-                    drawing_actions = [s for m in r.lrange(drawing_key, 0, -1)
+                    drawing_actions = [s for m in r.lrange(drawing_data_key, 0, -1)
                                        for s in m.split(",")]
-                    # If there are no actions, check to see if the drawing
-                    # data has been saved, and create the initial load
-                    # action for the data.
-                    if not drawing_actions:
-                        drawing = Drawing.objects.get(id=drawing_id)
-                        if drawing.data:
-                            drawing_actions = [drawing_id, "load", drawing.data]
-                            r.rpush(drawing_key, ",".join(drawing_actions))
                     # Dump the combined action list to the joining user.
                     socket.send(user_actions + drawing_actions)
                 elif action == "leave":
-                    image = message.pop(2)
                     # Remove the user from the user set.
-                    r.srem(users_key, ",".join(message[2:]))
-                    # Store the image data if no more users.
-                    if len(r.smembers(users_key)) == 0:
-                        drawing = Drawing.objects.get(id=drawing_id)
-                        drawing.data = image.replace(" ", "+")
-                        drawing.save()
-                        r.delete(drawing_key)
+                    r.srem(user_data_key, ",".join(message[2:]))
+                    # Remove the drawing actions if last user.
+                    if len(r.smembers(user_data_key)) == 0:
+                        r.delete(drawing_data_key)
                 elif action == "save":
-                    drawing = Drawing.objects.get(id=drawing_id)
-                    drawing.data = message[2].replace(" ", "+")
-                    drawing.save()
+                    drawing = Drawing.objects.create(title=message[2], data=message[3].replace(" ", "+"))
+                    for user in r.smembers(user_data_key):
+                        drawing.users.add(User.objects.get(id=user.split(",")[1]))
                     continue
                 else:
                     # Add the draw action.
-                    r.rpush(drawing_key, ",".join(message))
+                    r.rpush(drawing_data_key, ",".join(message))
                 socket.broadcast(message)
             else:
                 if not socket.connected():
@@ -73,35 +64,33 @@ def socketio(request):
     return HttpResponse("")
 
 @login_required
-def drawing_new(request, template="new.html"):
+def drawing_new(request):
     """
-    Creates a new drawing.
+    Creates a new drawing key and redirects to the edit view for it.
     """
-    form = DrawingForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            drawing = form.save()
-            drawing.users.add(request.user)
-            drawing.save()
-            messages.success(request, "Drawing created")
-            return redirect(drawing)
-    context = {"form": form}
-    return render(request, template, context)
+    drawing_key = "".join([choice(letters + digits) for i in range(6)])
+    return redirect("edit", drawing_key)
 
-@login_required
-def drawing_view(request, slug, template="view.html"):
+def drawing_edit(request, drawing_key, template="edit.html"):
     """
-    Display a drawing.
+    Edit a drawing.
     """
-    drawing = get_object_or_404(Drawing, slug=slug)
-    context = {"drawing": drawing}
+    context = {"drawing_key": drawing_key}
     return render(request, template, context)
 
 def drawing_list(request, template="list.html"):
     """
     List all completed drawings.
     """
-    context = {"drawings": Drawing.objects.filter(data__isnull=False)}
+    context = {"drawings": Drawing.objects.all()}
+    return render(request, template, context)
+
+def drawing_view(request, slug, template="view.html"):
+    """
+    Display a drawing.
+    """
+    drawing = get_object_or_404(Drawing, slug=slug)
+    context = {"drawing": drawing}
     return render(request, template, context)
 
 def login(request, provider):
