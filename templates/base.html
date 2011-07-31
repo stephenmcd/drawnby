@@ -23,41 +23,39 @@
 	<p>{{ message }}</p>
 	{% endfor %}
 
-	<ul>
-		<li>
-			<select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
-				<option>Join a drawing in progress</option>
-				{% load_in_progress %}
-				{% for drawing in progress %}
-				<option value="{% url edit drawing.key %}">
-				    {% for u in drawing.users %}
-				    {{ u }}{% if not forloop.last %},{% endif %}
-				    {% endfor %}
-				</option>
-				{% endfor %}
-			</select>
-		</li>
-		{% if request.user.is_authenticated %}
-		{% with request.user|photo_for_user as user_photo %}
-		<li>Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
-		{% endwith %}
-		{% endif %}
-	</ul>
-
 	<div class="container">
 		<header>
-			<a href="#"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
+			<a href="/"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
 			<nav>
 				<ul>
 					<li><a href="{% url new %}">New Sketch</a></li>
 					<li><a href="{% url list %}">View Gallery</a></li>
 					<li><a href="{% url about %}">About</a></li>
+					<li>
+						<select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
+							<option>Join a drawing in progress</option>
+							{% load_in_progress %}
+							{% for drawing in progress %}
+							<option value="{% url edit drawing.key %}">
+								{% for u in drawing.users %}
+								{{ u }}{% if not forloop.last %},{% endif %}
+								{% endfor %}
+							</option>
+							{% endfor %}
+						</select>
+					</li>
 				</ul>
 			</nav>
 		</header>
 	    {% block main %}
 	    {% endblock %}
+		
+		{% if request.user.is_authenticated %}
+		{% with request.user|photo_for_user as user_photo %}
+		<li>Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
+		{% endwith %}
+		{% endif %}
+	
 	</div>
-
 </body>
 </html>
