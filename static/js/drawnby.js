@@ -150,6 +150,9 @@ $(function() {
 
     // Start drawing on mousedown.
     canvas.mousedown(function(event) {
+        // Stops the cursor from reverting from the
+        // custom cursor in Chrome.
+        event.preventDefault();
         var coords = getCoords(this, event);
         drawing = true;
         send('mousedown', coords.x, coords.y,

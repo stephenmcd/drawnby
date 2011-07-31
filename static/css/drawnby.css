@@ -111,7 +111,8 @@ nav a:hover { background: #ed9519; background: -moz-linear-gradient(top, #ed9519
 .star-on {color:yellow;}
 .star-off {color:grey;}
 
-
+#canvas {cursor: url('../img/cursor_canvas.png'), pointer;}
+#palette {cursor: url('../img/cursor_palette.png'), pointer;} /* need to make this */
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }
