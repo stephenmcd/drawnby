@@ -4,7 +4,6 @@ from string import letters, digits
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -12,50 +11,22 @@ import redis
 
 from core.forms import DrawingForm
 from core.models import Drawing
+from core.utils import Actions
 
-
-pool = redis.ConnectionPool()
 
 def socketio(request):
     """
     Socket.IO handler.
     """
     socket = request.environ["socketio"]
-    r = redis.Redis(connection_pool=pool)
+    actions = Actions(socket)
     try:
         while True:
             message = socket.recv()
             if len(message) > 0:
-                drawing_key, action = message[:2]
-                drawing_data_key = "drawing-%s" % drawing_key
-                user_data_key = "users-%s" % drawing_key
-                if action == "join":
-                    # Add the user to the user set.
-                    r.sadd(user_data_key, ",".join(message[2:]))
-                    # Get all users with args prepended,
-                    # to look like join actions.
-                    user_actions = [s for m in r.smembers(user_data_key)
-                                    for s in [drawing_key, "join"] + m.split(",")]
-                    # Get all the draw actions.
-                    drawing_actions = [s for m in r.lrange(drawing_data_key, 0, -1)
-                                       for s in m.split(",")]
-                    # Dump the combined action list to the joining user.
-                    socket.send(user_actions + drawing_actions)
-                elif action == "leave":
-                    # Remove the user from the user set.
-                    r.srem(user_data_key, ",".join(message[2:]))
-                    # Remove the drawing actions if last user.
-                    if len(r.smembers(user_data_key)) == 0:
-                        r.delete(drawing_data_key)
-                elif action == "save":
-                    drawing = Drawing.objects.create(title=message[2], data=message[3].replace(" ", "+"))
-                    for user in r.smembers(user_data_key):
-                        drawing.users.add(User.objects.get(id=user.split(",")[1]))
-                    continue
-                else:
-                    # Add the draw action.
-                    r.rpush(drawing_data_key, ",".join(message))
-                socket.broadcast(message)
+                broadcast = actions(message)
+                if broadcast:
+                    socket.broadcast(message)
             else:
                 if not socket.connected():
                     break

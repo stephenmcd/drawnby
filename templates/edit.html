@@ -9,7 +9,7 @@
 
 {% block main %}
 <script>
-    window.drawingKey = {{ drawing_key }};
+    window.drawingKey = '{{ drawing_key }}';
     window.username = '{{ request.user.username|escapejs }}';
     window.userID = {{ request.user.id }};
 </script>

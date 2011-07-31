@@ -103,6 +103,7 @@ $(function() {
         send('leave');
     });
     socket.on('message', function(args) {
+        console.log(args);
         $('#loading').remove();
         action(args);
     });
