@@ -12,5 +12,9 @@
     </div>
     {% endfor %}
 </div>
+{% endblock %}
+
+{% block footer %}
+{% autopaginate drawings 10 %}
 {% paginate %}
 {% endblock %}
