@@ -99,6 +99,7 @@ nav a:hover { background: #ed9519; background: -moz-linear-gradient(top, #ed9519
 	border-radius: 4px;  }
 .loggedinas a { display: inline-block; margin: 0; }
 .loggedinas img { vertical-align: middle; }
+
 #canvas {border:1px solid #333;}
 
 .intro { width: 800px; margin: 25px auto; font-size: 22px; color: #7c7c7c; line-height: 2; text-align: center; }

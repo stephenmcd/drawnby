@@ -2,7 +2,7 @@
 {% load pagination_tags %}
 
 {% block main %}
-{% autopaginate drawings 2 %}
+{% autopaginate drawings 10 %}
 <div class="clearfix gallery-items">
     {% for drawing in drawings %}
     <div>
