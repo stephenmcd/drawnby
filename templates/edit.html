@@ -4,7 +4,12 @@
 <script src="{{ MEDIA_URL }}js/json.js"></script>
 <script src="{{ MEDIA_URL }}js/socket.io.js"></script>
 <script src="{{ MEDIA_URL }}js/excanvas.js"></script>
+<script src="{{ MEDIA_URL }}js/colorpicker.js"></script>
 <script src="{{ MEDIA_URL }}js/drawnby.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link href="{{ MEDIA_URL }}css/colorpicker.css" rel="stylesheet">
 {% endblock %}
 
 {% block main %}
@@ -13,7 +18,7 @@
     window.username = '{{ request.user.username|escapejs }}';
     window.userID = {{ request.user.id }};
 </script>
-
+<input
 <p id="loading">Loading...</p>
 
 <div class="toolbar">
@@ -23,13 +28,10 @@
 	<a href="" title="Cut" class="ir cut">Cut</a>
 	<a href="" title="Eyedropper" class="ir eyedrop">Eyedropper</a>
 	<a href="" title="Zoom" class="ir zoom">Zoom</a>
+	<a href="" id="color" class="ir"><div></div></a>
 </div>
 
 <canvas selectable="no" id="canvas" width="900" height="450"></canvas>
-
-<canvas id="palette" width="100" height="300"></canvas>
-<div id="color" style="width:100px; height:100px;"></div>
-
 
 Size:
 <ul id="size">
