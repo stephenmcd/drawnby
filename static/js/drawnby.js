@@ -51,9 +51,8 @@ $(function() {
         // User joining - add their name to the user list.
         join: function(username, userID) {
             if ($('#user-' + userID).length == 0) {
-                $('#users').append('<li id="user-' + userID + '">' +
-                                   '<img src="' + window.MEDIA_URL + 'photos/' + userID + '.20x20_q85_crop-smart.jpg">' +
-                                   username + '</li>');
+                data = {userID: userID, username: username};
+                $('#user-template').tmpl(data).appendTo('#users');
             }
         },
 

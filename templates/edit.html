@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block extra_js %}
+<script src="{{ MEDIA_URL }}js/jquery.tmpl.js"></script>
 <script src="{{ MEDIA_URL }}js/json.js"></script>
 <script src="{{ MEDIA_URL }}js/socket.io.js"></script>
 <script src="{{ MEDIA_URL }}js/excanvas.js"></script>
@@ -12,6 +13,12 @@
     window.drawingKey = '{{ drawing_key }}';
     window.username = '{{ request.user.username|escapejs }}';
     window.userID = {{ request.user.id }};
+</script>
+<script id="user-template" type="text/x-jquery-tmpl">
+<li id="user-${userID}">
+    <img src="${window.MEDIA_URL}photos/${userID}.20x20_q85_crop-smart.jpg">
+    ${username}
+</li>
 </script>
 <h1>{{ drawing }}</h1>
 <p id="loading">Loading...</p>
