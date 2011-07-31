@@ -16,8 +16,8 @@ interactions.
 Installation
 ------------
 
-DrawnBy was built on `Ubuntu`_ 10.04 provided by `Linode`_. The following
-packages are required and can be installed via apt::
+DrawnBy was built on `Ubuntu 10.04`_ VPS provided by `Linode`_. The
+following packages are required and can be installed via apt::
 
     sudo apt-get update
     sudo apt-get install build-essential
@@ -72,7 +72,7 @@ keys where defined.
 .. _`gevent`: http://www.gevent.org/
 .. _`Redis`: http://redis.io/
 .. _`Linode`: http://www.linode.com/
-.. _`Ubuntu`: http://www.ubuntu.com/
+.. _`Ubuntu 10.04`: http://www.ubuntu.com/
 .. _`Mercurial`: http://mercurial.selenic.com/
 .. _`BitBucket`: https://bitbucket.org/
 .. _`pip`: http://www.pip-installer.org/
