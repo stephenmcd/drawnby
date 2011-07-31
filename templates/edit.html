@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 
-
-{% block extra_css %}
-<link rel="stylesheet" href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.14.custom.css"> 
-{% endblock %}
-
 {% block extra_js %}
 <script src="{{ MEDIA_URL }}js/json.js"></script>
 <script src="{{ MEDIA_URL }}js/socket.io.js"></script>
@@ -20,16 +15,17 @@
 			min: 1,
 			max: 10,
 			slide: function( event, ui ) {
-				$( "#amount" ).html( ui.value );
+				$( "#amount span" ).html( ui.value );
 			}
 		});
-		$( "#amount" ).html( $( ".brushsize" ).slider( "value" ) );
+		$( "#amount span" ).html( $( ".brushsize" ).slider( "value" ) );
 	});
 </script>
 {% endblock %}
 
 {% block extra_css %}
 <link href="{{ MEDIA_URL }}css/colorpicker.css" rel="stylesheet">
+<link href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet"> 
 {% endblock %}
 
 {% block main %}
@@ -42,14 +38,10 @@
 <p id="loading">Loading...</p>
 
 <div class="toolbar">
-	<a href="" title="Select" class="ir select">Select</a>
 	<a href="" title="Pencil" class="ir pencil">Pencil</a>
 	<a href="" title="Brush" class="ir brush">Brush</a>
-	<div id="amount"></div>
+	<div id="amount"><span></span></div>
 	<div class="brushsize"></div>
-	<a href="" title="Cut" class="ir cut">Cut</a>
-	<a href="" title="Eyedropper" class="ir eyedrop">Eyedropper</a>
-	<a href="" title="Zoom" class="ir zoom">Zoom</a>
 	<a href="" id="color" class="ir"><div></div></a>
 </div>
 
