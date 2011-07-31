@@ -57,7 +57,7 @@ $(function() {
                 messages.add(username + ' has joined');
                 data = {userID: userID, username: username};
                 $('#user-template').tmpl(data).appendTo('#users');
-                $('#user-' + userID + ' img').tooltip();
+                $('#user-' + userID + ' img').tooltip({offset: [-5, 0]});
             }
         },
 
