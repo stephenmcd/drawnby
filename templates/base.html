@@ -24,7 +24,6 @@
 	{% endfor %}
 
 	<ul>
-		<li><a href="{% url new %}">New</a></li>
 		<li>
 			<select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
 				<option>Join a drawing in progress</option>
@@ -36,7 +35,6 @@
 				{% endfor %}
 			</select>
 		</li>
-		<li><a href="{% url list %}">Gallery</a></li>
 		{% if request.user.is_authenticated %}
 		{% with request.user|photo_for_user as user_photo %}
 		<li>Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></li>
@@ -49,9 +47,9 @@
 			<a href="#"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
 			<nav>
 				<ul>
-					<li><a href="#">New Sketch</a></li>
-					<li><a href="#">View Gallery</a></li>
-					<li><a href="#">About</a></li>
+					<li><a href="{% url new %}">New Sketch</a></li>
+					<li><a href="{% url list %}">View Gallery</a></li>
+					<li><a href="{% url about %}">About</a></li>
 				</ul>
 			</nav>
 		</header>
