@@ -69,7 +69,7 @@ class Actions(object):
         """
         Create a drawing object given the title and image data.
         """
-        drawing = Drawing.objects.create(title=message[2])
+        drawing = Drawing.objects.create(title=message[2][:20])
         for user_id in redis.smembers(self.drawers_data_key):
             drawing.users.add(User.objects.get(id=user_id))
         # Save image file for thumbnailing.

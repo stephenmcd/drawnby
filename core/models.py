@@ -13,7 +13,7 @@ from social_auth.signals import socialauth_registered
 class Drawing(models.Model):
 
     users = models.ManyToManyField("auth.User")
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=20)
     slug = models.SlugField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     rating = RatingField(range=5)
