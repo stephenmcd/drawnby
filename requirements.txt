@@ -10,3 +10,4 @@ gevent-socketio==0.2.1
 gevent-websocket==0.2.3
 redis==2.4.6
 docutils==0.7
+django-ratings==0.3.6
