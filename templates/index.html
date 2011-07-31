@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load core_tags %}
 
 {% block main %}
 	<p class="intro"><img src="{{ MEDIA_URL }}img/img-home-dblogo.png" alt="DrawnBy"> lets you draw and sketch artwork collaboratively with your friends! <br>Sign in below using your Facebook or Twitter account and to get started.</p>
@@ -7,16 +6,5 @@
 		<a href="{% url begin "twitter" %}"><img src="{{ MEDIA_URL }}img/img-home-twit.png" alt="Login via Twitter"></a>
 		<a href="{% url begin "facebook" %}"><img src="{{ MEDIA_URL }}img/img-home-fb.png" alt="Login via Facebook"></a>
 	</div>
-	<select onchange="if (this.selectedIndex > 0) {location.href=this[this.selectedIndex].value;}">
-		<option>Join a drawing in progress</option>
-		{% load_in_progress %}
-		{% for drawing in progress %}
-		<option value="{% url edit drawing.key %}">
-			{% for u in drawing.users %}
-			{{ u }}{% if not forloop.last %},{% endif %}
-			{% endfor %}
-		</option>
-		{% endfor %}
-	</select>
 	<img src="{{ MEDIA_URL }}img/img-home-explain.png" alt="Use DrawnBy to draw and sketch with friends. Check out the gallery, vote & add your sketches">
 {% endblock %}

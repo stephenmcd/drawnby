@@ -8,6 +8,7 @@
     {% load compress %}
     {% compress css %}
     <link href="{{ MEDIA_URL }}css/drawnby.css" rel="stylesheet">
+    <link href="{{ MEDIA_URL }}css/chosen.css" rel="stylesheet">
     {% block extra_css %}{% endblock %}
     {% endcompress %}
     {% compress js %}
@@ -15,7 +16,8 @@
     <script src="{{ MEDIA_URL }}js/jquery.js"></script>
     <script src="{{ MEDIA_URL }}js/jquery.tools.js"></script>
     <script src="{{ MEDIA_URL }}js/jquery.tmpl.js"></script>
-    <script src="{{ MEDIA_URL }}js/messages.js"></script>
+    <script src="{{ MEDIA_URL }}js/chosen.jquery.js"></script>
+    <script src="{{ MEDIA_URL }}js/global.js"></script>
     {% block extra_js %}{% endblock %}
     {% endcompress %}
 </head>
@@ -35,18 +37,22 @@
 			<a href="{% url home %}"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
 			<nav>
 				<ul>
-					<li><a href="{% url new %}">New Sketch</a></li>
-					<li><a href="{% url list %}">View Gallery</a></li>
-					<li><a href="{% url about %}">About</a></li>
-					<li>
-						{% if request.user.is_authenticated %}
-							{% with request.user|photo_for_user as user_photo %}
-							<div class="loggedinas">Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></div>
-							{% endwith %}
-						{% else %}
-							<a href="">Login</a>
-						{% endif %}
-					</li>
+	                <li class="progress">
+	                    <select id="progress">
+		                    <option>Sketch with someone ...</option>
+		                    {% load_in_progress %}
+		                    {% for drawing in progress %}
+		                    <option value="{% url edit drawing.key %}">
+			                    {% for u in drawing.users %}
+			                    {{ u }}{% if not forloop.last %},{% endif %}
+			                    {% endfor %}
+		                    </option>
+		                    {% endfor %}
+	                    </select>
+	                </li>
+					<li class="button"><a href="{% url new %}">New Sketch</a></li>
+					<li class="button"><a href="{% url list %}">View Gallery</a></li>
+					<li class="button"><a href="{% url about %}">About</a></li>
 				</ul>
 			</nav>
 		</header>

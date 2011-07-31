@@ -24,4 +24,9 @@ $(function() {
         return false;
     });
     messages.show();
+    $('#progress').chosen().change(function() {
+        if (this.selectedIndex > 0) {
+            location = this[this.selectedIndex].value;
+        }
+    });
 });
