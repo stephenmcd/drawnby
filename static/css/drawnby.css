@@ -126,6 +126,15 @@ nav a:hover { background: #ed9519; background: -moz-linear-gradient(top, #ed9519
 #canvas {cursor: url('../img/cursor_canvas.png'), pointer;}
 #palette {cursor: url('../img/cursor_palette.png'), pointer;} /* need to make this */
 
+footer {background:#efefef; padding:10px; margin:0 15px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;  }
+footer * {vertical-align:middle; color:#572b80; font-size:13px;}
+#users, #users li {display:inline; margin:0;}
+#users img {margin-top:-8px;}
+#users .username {display:none;}
+
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }

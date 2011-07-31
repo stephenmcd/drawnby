@@ -31,14 +31,6 @@ Size:
     {% endwith %}
     {% endfor %}
 </ul>
-
-Users:
-<ul id="users"></ul>
-<script id="user-template" type="text/x-jquery-tmpl">
-<li id="user-${userID}">
-    <img src="${window.MEDIA_URL}photos/${userID}.20x20_q85_crop-smart.jpg">
-    ${username}
-</li>
-</script>
+{% include "footer.html" %}
 
 {% endblock %}

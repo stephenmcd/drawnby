@@ -1,0 +1,19 @@
+{% load thumbnail core_tags %}
+<script>
+$(function() {
+    $('#users img').tooltip();
+});
+</script>
+<footer>
+    <span>People in this sketch:</span>
+    <ul id="users">
+        {% for u in drawing.users.all %}
+	    {% with u|photo_for_user as user_photo %}
+	    <li><img title="{{ u.username }}" src="{% thumbnail user_photo 20x20 crop="smart" %}"></li>
+	    {% endwith %}
+        {% endfor %}
+    </ul>
+    <script id="user-template" type="text/x-jquery-tmpl">
+        <li id="user-${userID}"><img title="${username}" src="${window.MEDIA_URL}photos/${userID}.20x20_q85_crop-smart.jpg"></li>
+    </script>
+</footer><br>
