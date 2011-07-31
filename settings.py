@@ -38,19 +38,27 @@ ROOT_URLCONF = "urls"
 TEMPLATE_DIRS = full_path("templates")
 
 INSTALLED_APPS = (
+
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.sessions",
     "django.contrib.sites",
-    "django_extensions",
-    "social_auth",
-    "easy_thumbnails",
-    "south",
-    "pagination",
+
+    # 3rd Party
     "compressor",
+    "django_extensions",
+    "djangoratings",
+    "easy_thumbnails",
+    "pagination",
+    "social_auth",
+    "south",
+
+    # Project
     "core",
+
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

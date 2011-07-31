@@ -9,6 +9,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from djangoratings.views import AddRatingFromModel
 import redis
 
 from core.forms import DrawingForm
@@ -65,6 +66,16 @@ def drawing_view(request, slug, template="view.html"):
     drawing = get_object_or_404(Drawing, slug=slug)
     context = {"drawing": drawing}
     return render(request, template, context)
+
+def drawing_rate(request, drawing_id, score):
+    """
+    Wrap around djangorating's view so we can send a message and
+    redirect back.
+    """
+    view = AddRatingFromModel()
+    response = view(request, "drawing", "core", drawing_id, "rating", score)
+    messages.success(request, response.content)
+    return redirect(request.GET.get("next", "list"))
 
 def login(request, template="login.html"):
     """

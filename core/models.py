@@ -6,6 +6,7 @@ from urllib import urlretrieve
 from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
+from djangoratings.fields import RatingField
 from social_auth.signals import socialauth_registered
 
 
@@ -16,6 +17,7 @@ class Drawing(models.Model):
     slug = models.SlugField(blank=True, null=True)
     data = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    rating = RatingField(range=5)
 
     class Meta:
         ordering = ("-id",)
