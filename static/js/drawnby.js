@@ -177,7 +177,10 @@ $(function() {
     });
 
     // Explict save.
-    $('#save').click(save);
+    $('#save').click(function() {
+        save()
+        return false;
+    });
 
     // Color picker.
     $(function() {
