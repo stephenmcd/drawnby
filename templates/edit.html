@@ -7,25 +7,11 @@
 <script src="{{ MEDIA_URL }}js/colorpicker.js"></script>
 <script src="{{ MEDIA_URL }}js/drawnby.js"></script>
 <script src="{{ MEDIA_URL }}js/jquery-ui-1.8.14.custom.min.js"></script>
-<script>
-	$(function() {
-		$( ".brushsize" ).slider({
-			orientation: "vertical",
-			range: "max",
-			min: 1,
-			max: 10,
-			slide: function( event, ui ) {
-				$( "#amount span" ).html( ui.value );
-			}
-		});
-		$( "#amount span" ).html( $( ".brushsize" ).slider( "value" ) );
-	});
-</script>
 {% endblock %}
 
 {% block extra_css %}
 <link href="{{ MEDIA_URL }}css/colorpicker.css" rel="stylesheet">
-<link href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet"> 
+<link href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet">
 {% endblock %}
 
 {% block main %}
@@ -46,15 +32,6 @@
 </div>
 
 <canvas selectable="no" id="canvas" width="900" height="450"></canvas>
-
-Size:
-<ul id="size">
-    {% for size in "0123456789" %}
-    {% with size|get_digit:1 as size %}
-    <li><a href="#" id="size-{{ size }}">{{ size }}</a></li>
-    {% endwith %}
-    {% endfor %}
-</ul>
 
 {% endblock %}
 
