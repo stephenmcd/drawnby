@@ -45,6 +45,7 @@ def drawing_new(request):
     drawing_key = "".join([choice(letters + digits) for i in range(6)])
     return redirect("edit", drawing_key)
 
+@login_required
 def drawing_edit(request, drawing_key, template="edit.html"):
     """
     Edit a drawing.
