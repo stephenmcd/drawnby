@@ -1,7 +1,9 @@
 
+from os.path import join
 from random import choice
 from string import letters, digits
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
@@ -88,3 +90,16 @@ def logout(request):
         auth_logout(request)
     messages.success(request, "Logged out")
     return redirect("home")
+
+def about(request, template="about.html"):
+    """
+    Convert the README file into HTML.
+    """
+    from docutils.core import publish_string
+    from docutils.writers.html4css1 import Writer, HTMLTranslator
+    writer = Writer()
+    writer.translator_class = HTMLTranslator
+    with open(join(settings.PROJECT_ROOT, "README.rst"), "r") as f:
+        about = publish_string(f.read(), writer=writer)
+    context = {"about": about}
+    return render(request, template, context)
