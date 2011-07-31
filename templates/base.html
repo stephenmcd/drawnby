@@ -6,26 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>DrawnBy - Collaborative creativity</title>
     {% load compress %}
-    {% compress js %}
-    <script>window.MEDIA_URL = '{{ MEDIA_URL }}';</script>
-    <script src="{{ MEDIA_URL }}js/jquery.js"></script>
-    <script src="{{ MEDIA_URL }}js/jquery.tools.js"></script>
-    {% block extra_js %}{% endblock %}
-    {% endcompress %}
     {% compress css %}
     <link href="{{ MEDIA_URL }}css/drawnby.css" rel="stylesheet">
     {% block extra_css %}{% endblock %}
     {% endcompress %}
+    {% compress js %}
+    <script>window.MEDIA_URL = '{{ MEDIA_URL }}';</script>
+    <script src="{{ MEDIA_URL }}js/jquery.js"></script>
+    <script src="{{ MEDIA_URL }}js/jquery.tmpl.js"></script>
+    <script src="{{ MEDIA_URL }}js/messages.js"></script>
+    {% block extra_js %}{% endblock %}
+    {% endcompress %}
 </head>
 <body>
 
-	{% for message in messages %}
-	<p>{{ message }}</p>
-	{% endfor %}
+    <div id="messages">
+        {% for message in messages %}
+        <div class="message">{{ message }}<a href="#">x</a></div>
+        {% endfor %}
+    </div>
+    <script id="message-template" type="text/x-jquery-tmpl">
+        <div class="message">${msg}<a href="#">x</a></div>
+    </script>
 
 	<div class="container">
 		<header>
-			<a href="/"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
+			<a href="{% url home %}"><img src="{{ MEDIA_URL }}img/logo.png" alt="DrawnBy"></a>
 			<nav>
 				<ul>
 					<li><a href="{% url new %}">New Sketch</a></li>

@@ -54,6 +54,7 @@ $(function() {
         // User joining - add their name to the user list.
         join: function(username, userID) {
             if ($('#user-' + userID).length == 0) {
+                messages.add(username + ' has joined');
                 data = {userID: userID, username: username};
                 $('#user-template').tmpl(data).appendTo('#users');
             }
@@ -62,6 +63,7 @@ $(function() {
         // User leaving - remove their name from the user list.
         leave: function(username, userID) {
             if (userID != window.userID) {
+                messages.add(username + ' has left');
                 $('#user-' + userID).remove();
             }
         }
@@ -106,6 +108,7 @@ $(function() {
     var save = function() {
         var title = prompt('Save as:');
         if (title) {
+            messages.add('Sketch saved');
             socket.send([window.drawingKey, 'save', title,
                         canvas.get()[0].toDataURL('image/png')])
         }
