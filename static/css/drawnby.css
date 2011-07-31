@@ -80,6 +80,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
  * Author: @joshwins, @stephen_mcd
  */
 
+/* Generic */
 body { font-family: Arial, Helvetica, serif; background: url('../img/bg.png'); }
 .container { width: 960px; margin: 50px auto; background: #fff; -webkit-box-shadow: 0px 0px 60px 10px #ffffff; -moz-box-shadow: 0px 0px 60px 10px #ffffff; box-shadow: 0px 0px 60px 10px #ffffff; }
 header { border-bottom: 1px solid #fff; margin-bottom: 12px; background: #572b80; -webkit-box-shadow: 0px 5px 15px 5px #d0d0d0; -moz-box-shadow: 0px 5px 15px 5px #d0d0d0; box-shadow: 0px 5px 15px 5px #d0d0d0; }
@@ -96,37 +97,75 @@ nav a:hover { background: #ed9519; background: -moz-linear-gradient(top, #ed9519
 .loggedinas { margin: 28px 10px 0 0; padding-left: 5px; color: #fff; background: #ac72e4; font-size: 11px; text-shadow: 0px 1px 1px #292929;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px;  }
+	border-radius: 4px; 
+	-webkit-box-shadow: inset 0px 0px 0px 1px #30134c;
+	-moz-box-shadow: inset 0px 0px 0px 1px #30134c;
+	box-shadow: inset 0px 0px 0px 1px #30134c;
+	}
 .loggedinas a { display: inline-block; margin: 0; }
 .loggedinas img { vertical-align: middle; }
 
-#canvas {border:1px solid #333;}
+.message { position:absolute; z-index:1; text-align:center; background:#fff; display:none; color:#000; font-size:14px; top:0; width:100%; height:30px; padding-top:10px; }
+.message a { float:right; text-decoration:none; margin:-4px 10px 0 0; color:#000; font-size:20px; background:#eee; padding:0 8px 4px; }
 
+footer { margin: 10px; min-height: 40px; color: #572b80; font-size: 11px; background: #efefef; -webkit-border-radius: 4px;	-moz-border-radius: 4px; border-radius: 4px; }
+
+/* home */
 .intro { width: 800px; margin: 25px auto; font-size: 22px; color: #7c7c7c; line-height: 2; text-align: center; }
 .intro img { float: left; margin: 3px 0 0 40px; }
 .login-buttons { width: 320px; margin: 5px auto 20px; }
 .login-buttons  img { margin: 0 5px; }
 
+/* About */
 .about {padding:40px;}
 .about h1 {font-size:20px; margin:30px 0 10px 0;}
 
+/* Gallery */
 .gallery-items div, .gallery-items img {width:170px;}
 .gallery-items div {float:left; text-align:center; border:1px solid #ccc; margin:10px;}
 .gallery-items img {display:block;}
+	
+	/* Ratings */
+	.star-on, .star-off {text-decoration:none; font-size:20px !important; margin:0;}
+	.star-on {color:yellow;}
+	.star-off {color:grey;}
 
-.star-on, .star-off {text-decoration:none; font-size:20px !important; margin:0;}
-.star-on {color:yellow;}
-.star-off {color:grey;}
+/* Drawing */
 
-.message {position:absolute; z-index:1; text-align:center; background:#fff; display:none;
-    color:#000; font-size:14px; top:0; width:100%; height:30px; padding-top:10px;}
-.message a {float:right; text-decoration:none; margin:-4px 10px 0 0; color:#000;
-    font-size:20px; background:#eee; padding:0 8px 4px 8px;}
+.toolbar { float: left; width: 40px; margin: 0 6px; background: #efefef; }
+.toolbar a { width: 30px; height: 30px; margin: 2px auto 3px auto; background: #cbcbcb url('../img/sp-tools.png') no-repeat 0 0; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
+.toolbar .select { background-position: 4px 5px; }
+.toolbar .pencil { background-position: 4px -31px; }
+.toolbar .brush { background-position: 4px -66px; }
+.toolbar .cut { background-position: 4px -101px; }
+.toolbar .eyedrop { background-position: 4px -136px; }
+.toolbar .zoom { background-position: 4px -170px; }
+.toolbar a:hover { background-color: #8a8a8a; }
 
-#canvas {cursor: url('../img/cursor_canvas.png'), pointer;}
-#palette {cursor: url('../img/cursor_palette.png'), pointer;} /* need to make this */
+.functions { display: inline-block; width: 250px; border-left: 2px solid #fff; text-align: center; }
+.functions ul { margin: 0; }
+.functions li { list-style: none; display: inline-block; padding: 10px 0; }
+.functions a { width: 20px; height: 20px; margin: 0 2px 0 3px; background: #cbcbcb url('../img/sp-functions.png') no-repeat 0 0; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
+.functions .save { background-position: 4px 3px; }
+.functions .print { background-position: -21px 3px; }
+.functions .email { background-position: -46px 3px; }
+.functions .undo { background-position: -71px 3px; }
+.functions .download { background-position: -96px 3px; }
+.functions .delete { background-position: -121px 4px; }
+.functions a:hover { background-color: #8a8a8a; }
 
-.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.userslist { display: inline-block; width: 680px; }
+
+#canvas { border:1px solid #333; cursor: url('../img/cursor_canvas.png'), pointer; }
+#palette { cursor: url('../img/cursor_palette.png'), pointer; } /* need to make this */
+
+
+
+
+
+
+/* Presets */
+.ir { display: block; text-indent: -9999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 .visuallyhidden.focusable:active,

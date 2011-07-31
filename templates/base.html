@@ -43,7 +43,7 @@
 							<div class="loggedinas">Logged in as <img src="{% thumbnail user_photo 20x20 crop="smart" %}"> {{ request.user.username }} <a href="{% url logout %}">Logout</a></div>
 							{% endwith %}
 						{% else %}
-							<a href="">Login</a>
+							<a href="{% url login %}">Login</a>
 						{% endif %}
 					</li>
 				</ul>
