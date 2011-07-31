@@ -2,12 +2,9 @@
 
 {% block main %}
 	<p class="intro"><img src="{{ MEDIA_URL }}img/img-home-dblogo.png" alt="DrawnBy"> lets you draw and sketch artwork collaboratively with your friends! <br>Sign in below using your Facebook or Twitter account and to get started.</p>
-	{% with request.GET.next as next %}
 	<div class="login-buttons">
-		<a href="{% url login "twitter" %}?next={{ next }}"><img src="{{ MEDIA_URL }}img/img-home-twit.png" alt="Login via Twitter"></a>
-		<a href="{% url login "facebook" %}?next={{ next }}"><img src="{{ MEDIA_URL }}img/img-home-fb.png" alt="Login via Facebook"></a>
+		<a href="{% url begin "twitter" %}"><img src="{{ MEDIA_URL }}img/img-home-twit.png" alt="Login via Twitter"></a>
+		<a href="{% url begin "facebook" %}"><img src="{{ MEDIA_URL }}img/img-home-fb.png" alt="Login via Facebook"></a>
 	</div>
-	{% endwith %}
-
-	<img src="{{ MEDIA_URL }}img/img-home-explain.png" alt="Use drawnBy to draw and sketch with friends. Check out the gallery, vote & add your sketches">
+	<img src="{{ MEDIA_URL }}img/img-home-explain.png" alt="Use DrawnBy to draw and sketch with friends. Check out the gallery, vote & add your sketches">
 {% endblock %}

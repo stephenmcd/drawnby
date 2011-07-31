@@ -66,11 +66,12 @@ def drawing_view(request, slug, template="view.html"):
     context = {"drawing": drawing}
     return render(request, template, context)
 
-def login(request, provider):
+def login(request, template="login.html"):
     """
     Login - store the next param as a cookie since session may be lost.
     """
-    response = redirect("begin", provider)
+    context = {}
+    response = render(request, template, context)
     response.set_cookie("next", request.GET.get("next", "home"))
     return response
 
