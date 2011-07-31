@@ -1,5 +1,6 @@
 
 from django.template import Library
+from redis import ConnectionError
 
 from core.models import Drawing
 from core.utils import redis
@@ -22,10 +23,13 @@ def load_in_progress(context):
     in progress.
     """
     progress = []
-    for key in redis.keys("users-*"):
-        progress.append({
-            "key": key.split("-")[1],
-            "users": [u.split(",")[0] for u in redis.smembers(key)],
-        })
+    try:
+        for key in redis.keys("users-*"):
+            progress.append({
+                "key": key.split("-")[1],
+                "users": [u.split(",")[0] for u in redis.smembers(key)],
+            })
+    except ConnectionError:
+        pass
     context["progress"] = sorted(progress, key=lambda x: len(x["users"]), reverse=True)
     return ""
