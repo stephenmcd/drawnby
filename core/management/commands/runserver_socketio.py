@@ -41,5 +41,5 @@ class Command(BaseCommand):
                 raise CommandError('"%s" is not a valid port number '
                                    'or address:port pair.' % addrport)
             self.addr, _, _, _, self.port = m.groups()
-        server = SocketIOServer((self.addr, self.port), application)
+        server = SocketIOServer((self.addr, int(self.port)), application)
         server.serve_forever()
