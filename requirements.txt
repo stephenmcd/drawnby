@@ -11,3 +11,5 @@ gevent-websocket==0.3.6
 redis==2.4.6
 docutils==0.7
 django-ratings==0.3.6
+gunicorn==0.14.6
+PIL==1.1.7
