@@ -12,7 +12,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from djangoratings.views import AddRatingFromModel
 import redis
 
-from core.forms import DrawingForm
 from core.models import Drawing
 from core.utils import Actions
 
