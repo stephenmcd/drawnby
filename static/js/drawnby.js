@@ -103,22 +103,21 @@ $(function() {
             return args;
         };
         action(getArgs(arguments));
-        socket.send(getArgs(arguments));
+        socket.emit('message', getArgs(arguments));
     };
 
     var save = function() {
         var title = prompt('Save as:');
         if (title) {
             messages.add('Sketch saved');
-            socket.send([window.drawingKey, 'save', title,
-                        canvas.get()[0].toDataURL('image/png')])
+            socket.emit('message', [window.drawingKey, 'save', title,
+                                    canvas.get()[0].toDataURL('image/png')])
         }
         dirty = false;
     };
 
     // Socket.IO setup.
-    var socket = new io.Socket();
-    socket.connect();
+    self.socket = io.connect(':9000');
     socket.on('connect', function() {
         send('join');
     });

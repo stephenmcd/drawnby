@@ -18,8 +18,8 @@ class Actions(object):
     each drawing action.
     """
 
-    def __init__(self, socket):
-        self.socket = socket
+    def __init__(self, namespace):
+        self.namespace = namespace
         self.handlers = ("join", "leave", "save", "mousedown")
 
     def __call__(self, message):
@@ -50,7 +50,7 @@ class Actions(object):
                         for s in [self.drawing_key, "join"] + m.split(",")]
         drawing_actions = [s for m in redis.lrange(self.drawing_data_key, 0, -1)
                            for s in m.split(",")]
-        self.socket.send(user_actions + drawing_actions)
+        self.namespace.emit("message", user_actions + drawing_actions)
         return True
 
     def leave(self, message):
